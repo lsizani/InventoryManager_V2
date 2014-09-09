@@ -12,5 +12,25 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+
+function altRows(id){
+    if(document.getElementsByTagName){
+
+       var table = document.getElementById(id);
+       var rows = table.getElementsByTagName("tr");
+
+       for(var i = 0; i < rows.length; i++){
+           if(i % 2 == 0 || rows.length <= 1){
+               rows[i].className = "evenRow"
+           }else{
+               rows[i].className = "oddRow"
+           }
+       }
+    }
+}
+
+window.onload = function(){
+    altRows("altColors");
+}

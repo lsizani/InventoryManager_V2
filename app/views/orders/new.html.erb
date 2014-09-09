@@ -1,0 +1,45 @@
+<h1>Place Order for Reagent Request <%= @request.reagent_name %></h1>
+
+
+  <pre>
+    <strong>Requested By:</strong> <%= @request.requested_by %> <br>
+    <strong>Reagent Name:</strong>  <%= @request.reagent_name %> <br>
+    <strong>Requested Date: </strong><%= @request.requested_date  %><br>
+    <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
+    <strong>Requested For Study:  </strong><%= @request.requested_for_study %> <br>
+    <%if %>
+  </pre>
+
+<%= form_for :order, url: orders_path do |o| %>
+    <p>
+      <%= o.label :order_No %>
+      <%= o.text_field :order_no %>  |
+      <%= o.label :ordered_Date %>
+      <%= o.date_select :ordered_date %>
+    </p>
+       <% if @request.catalog_no.blank? %>
+    <p>
+      <%= o.label :catalog_No %>
+      <%= o.text_field :catalog_no %>
+    </p>
+    <p>
+      <%= o.label :manufacturer %>
+      <%= o.text_field :manufacturer %>
+
+      <%= o.label :supplier %>
+      <%= o.text_field :supplier %>
+    </p>
+        <% end %>
+    <p>
+      <%= o.label :ordered_Amount %>
+      <%= o.text_field :ordered_amount %>
+    </p>
+        <%= hidden_field_tag 'request_id', @request.id %>
+      <%= o.submit %>
+<% end %>
+
+<br>
+<div class="navBox">
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+</div>

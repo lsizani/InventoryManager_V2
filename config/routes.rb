@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'reagents/index'
+
+InventoryManagerV2::Application.routes.draw do
+  get 'reagents/index'
+
+    resources :requests, :orders, :reagents
+    root 'welcome#index'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

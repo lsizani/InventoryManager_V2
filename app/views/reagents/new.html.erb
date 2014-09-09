@@ -1,0 +1,48 @@
+<h1>Log New Reagent</h1>
+
+<p>
+  <strong>Requested By:</strong> <%= @request.requested_by %>    <strong>Order Number: </strong> <%= @order.order_no %><br>
+  <strong>Requested Date:</strong> <%= @request.requested_date  %>    <strong>Ordered Date: </strong> <%= @order.ordered_date %> <br>
+</p>
+
+<p>
+  <strong>Reagent Name:</strong>  <%= @request.reagent_name %> <br>
+  <strong>Requested_Amount:</strong> <%= @request.requested_amount %>
+</p>
+
+<p>
+  <strong>Requested For Study:</strong>  <%= @request.requested_for_study %> <br>
+</p>
+
+<%= form_for :reagent, url: reagents_path do |r| %>
+   <p>
+     <%= r.label :received_Date %>
+     <%= r.date_select :received_date %>
+
+      <%= r.label :expiration_Date %>
+      <%= r.date_select :expiration_date %>
+    </p>
+
+    <p>
+      <%= r.label :item_Lot_Number %>
+      <%= r.text_field :item_lot_no %>
+
+      <%= r.label :item_Cat_Number %>
+      <%= r.text_field :item_cat_no %>
+    </p>
+
+    <p>
+      <%= r.label :storage_Temp_Kit %>
+      <%= r.text_field :storage_temp_kit %>
+
+      <%= r.label :storage_Location %>
+      <%= r.text_field :storage_location %>
+    </p>
+
+    <p>
+      <%= r.label :delivered_Amount %>
+      <%= r.text_field :delivered_amount %>
+    </p>
+        <%= hidden_field_tag 'order_id', @order.id %>
+         <%= r.submit %>
+<% end %>

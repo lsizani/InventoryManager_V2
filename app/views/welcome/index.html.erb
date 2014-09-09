@@ -1,0 +1,10 @@
+<%= image_tag 'logo_mid.png', size: '400x200',:align => 'top'  %>
+<h1 class="home">Inventory Management</h1>
+
+<div class="homeBox">
+    <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+
+    <%= link_to 'Reagent Orders', :controller => 'orders', :action => 'index'%>       |
+
+    <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index'%>
+</div>

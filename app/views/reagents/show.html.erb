@@ -1,0 +1,33 @@
+<h1>Generated Label For: <%= @request.reagent_name%></h1>
+
+<div class="showBox" align="left">
+   <p>Reagent Name: <%= @request.reagent_name %> | Order Number: <%= @order.order_no %></p>
+   <p>Requested Date: <%= @request.requested_date %> | Ordered Date: <%= @order.ordered_date %></p>
+   <p>Received Date: <%= @reagent.received_date %> | Expiration Date: <%= @reagent.expiration_date %></p>
+   <p>Storage Temp Kit: <%= @reagent.storage_temp_kit %> | Storage Location: <%= @reagent.storage_location %></p>
+
+
+</div>
+
+<div class="navBox">
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Reagent Orders', :controller => 'orders', :action => 'index' %>  |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+</div>
+<div class="barCode">
+
+<table class="btable">
+  <% @qr.modules.each_index do |x| %>
+      <tr class="btable">
+        <% @qr.modules.each_index do |y| %>
+            <% if @qr.dark?(x,y) %>
+                <td class="black"/>
+            <% else %>
+                <td class="white"/>
+            <% end %>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+</div>

@@ -1,0 +1,46 @@
+<h1>Reagents in Storage</h1>
+<table align='center'>
+  <thead>
+    <tr>
+      <td>Reagent Name</td>
+      <td>Item Lot No</td>
+      <td>Item Cat No</td>
+      <td>Amount Delivered</td>
+      <td>Amount Left</td>
+      <td>Received Date</td>
+      <td>Expiration Date</td>
+      <td>Storage Location</td>
+    </tr>
+  </thead>
+  <tbody id="altColors">
+    <% @reagents.each do |reagent| %>
+        <% @orders.each do |order| %>
+           <% if order.id == reagent.order_id %>
+                <% @requests.each do |request| %>
+                    <% if request.id == order.request_id %>
+                      <tr>
+                        <td> <%=request.reagent_name%> </td>
+                        <td> <%=reagent.item_lot_no%> </td>
+                        <td> <%=reagent.item_cat_no%> </td>
+                        <td> <%=reagent.delivered_amount%> </td>
+                        <td> <%=reagent.amount_left%> </td>
+                        <td> <%=reagent.received_date%> </td>
+                        <td> <%=reagent.expiration_date%> </td>
+                        <td> <%=reagent.storage_location%> </td>
+                      </tr>
+                    <% end %>
+
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+
+  </tbody>
+</table>
+
+<br>
+<div class="navBox">
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Reagent Orders', :controller => 'orders', :action => 'index' %>  |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+</div>

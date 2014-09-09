@@ -1,0 +1,30 @@
+<h1>Order Created</h1>
+
+<p>
+  Order Number: <%= @order.order_no %>
+
+  Lot Number: <%= @order.lot_no  %>
+</p>
+
+<p>
+  Catalog Number: <%= @order.catalog_no %>
+
+  Ordered Amount: <%= @order.ordered_amount %>
+
+</p>
+
+<p>
+  Ordered Date: <%= @order.ordered_date %>
+</p>
+
+<p>
+  Manufacturer: <%= @order.manufacturer %>
+  Supplier: <%= @order.supplier %>
+
+  Request ID: <%= @order.request_id%>
+</p>
+
+<p>
+  <%= link_to "Home", :controller => "welcome", :action => "index" %>
+  <%= link_to "View All Orders", :controller => "orders", :action => "index" %>
+</p>

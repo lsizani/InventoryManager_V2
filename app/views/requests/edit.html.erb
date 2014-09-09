@@ -1,0 +1,29 @@
+<h1>Edit Data For Request <%= params[:id] %></h1>
+
+
+<%= form_for :request, :url => { :action => 'update' }, :html => { :method => 'put' } do |r| %>
+    <p>
+      <%= r.label :requested_By %>
+      <%= r.text_field :requested_by %>
+
+      <%= r.label :requested_Date %>
+      <%= r.date_select :requested_date  %>
+    </p>
+
+    <p>
+      <%= r.label :reagent_Name %>
+      <%= r.text_field :reagent_name %>
+
+      <%= r.label :requested_Amount %>
+      <%= r.text_field :requested_amount %>
+
+    </p>
+        <%= r.label :requested_For_Study %>
+        <%= r.text_field :requested_for_study %>
+    <p>
+
+    </p>
+    <%= r.submit %>
+<% end %>
+
+<%= link_to 'Cancel', :controller => 'requests', :action => 'index' %>

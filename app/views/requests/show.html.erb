@@ -1,0 +1,21 @@
+<h2>Show Request <%= @request.id %> </h2>
+
+<p>
+  Requested By: <%= @request.requested_by %> <br>
+  Requested Date: <%= @request.requested_date  %>
+</p>
+
+<p>
+  Reagent Name:  <%= @request.reagent_name %> <br>
+  Requested_Amount: <%= @request.requested_amount %>
+</p>
+
+<p>
+  Requested For Study:  <%= @request.requested_for_study %> <br>
+</p>
+
+<p>
+    <%= link_to 'Create New Request', :controller => 'requests', :action => 'new' %>
+    <%= link_to 'Home', :controller => 'welcome', :action => 'index' %>
+    <%= link_to 'View All Requests', :controller => 'requests', :action => 'index' %>
+</p>
