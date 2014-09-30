@@ -1,0 +1,37 @@
+<h1>Reagent Log: <%= @reagent.item_lot_no  %></h1>
+<% if @log.nil? or @log.count < 1 %>
+    <h1>No Log Entries</h1>
+    <div class="navBox"><%= link_to 'New', :controller => 'logs', :action => 'new', :reagent_id => @reagent_id %> |
+       <%= link_to 'Back', :controller => 'reagents', :action => 'index' %>
+    </div>
+<% else %>
+    <table align='center'>
+      <thead>
+       <td>Number</td>
+       <td>Item Lot No</td>
+       <td>Date Received</td>
+       <td>Expiry Date</td>
+       <td>Date Opened</td>
+       <td>Used By: </td>
+       <td>For Study:  </td>
+      </thead>
+      <tbody id="altColors">
+         <% @log.each do |l| %>
+            <tr>
+              <td><%= l.number %></td>
+              <td><%= l.item_lot_no %></td>
+              <td><%= l.received_date %></td>
+              <td><%= l.expiration_date %></td>
+              <td><%= l.opened_date %></td>
+              <td><%= l.opened_by %></td>
+              <td><%= l.for_study %></td>
+            </tr>
+         <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div class="navBox">
+      <%= link_to 'New Entry', :controller => 'logs', :action => 'new', :reagent_id => @reagent_id %> |
+      <%= link_to 'Back', :controller => 'reagents', :action => 'index' %>
+    </div>
+<% end %>

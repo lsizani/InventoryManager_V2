@@ -3,10 +3,10 @@
 <table align="center" >
   <thead>
    <tr>
-    <td>Reagent Name</td>
-    <td>Requested By</td>
-    <td>Requested For Study</td>
-    <td>Requested amount</td>
+    <td><%= link_to 'Reagent Name', :controller => 'requests', :action => 'index', :order => 'reagent_name' %></td>
+    <td><%= link_to 'Requested By', :controller => 'requests', :action => 'index', :order => 'requested_by' %></td>
+    <td><%= link_to 'Requested For Study', :controller => 'requests', :action => 'index', :order => 'requested_for_study' %></td>
+    <td><%= link_to 'Requested Amount', :controller => 'requests', :action => 'index', :order => 'requested_amount' %></td>
     <td>Request Date</td>
     <td>Request Status</td>
     <td>Last Date Updated</td>

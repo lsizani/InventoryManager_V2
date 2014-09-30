@@ -11,13 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904150413) do
+ActiveRecord::Schema.define(version: 20140919055631) do
+
+  create_table "kit_items", force: true do |t|
+    t.integer  "reagent_id"
+    t.string   "item_name"
+    t.string   "item_lot_no"
+    t.string   "item_cat_no"
+    t.date     "item_expiration_date"
+    t.decimal  "item_storage_temp"
+    t.string   "item_storage_location"
+    t.date     "last_date_updated"
+    t.boolean  "is_item_used"
+    t.date     "date_opened"
+    t.string   "used_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "logs", force: true do |t|
+    t.integer  "reagent_id"
+    t.integer  "number"
+    t.string   "item_lot_no"
+    t.date     "received_date"
+    t.date     "expiration_date"
+    t.date     "opened_date"
+    t.string   "opened_by"
+    t.string   "for_study"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", force: true do |t|
     t.integer  "request_id"
     t.string   "order_no"
     t.string   "catalog_no"
-    t.string   "lot_no"
+    t.decimal  "catalog_amount"
     t.string   "manufacturer"
     t.string   "supplier"
     t.decimal  "ordered_amount"
@@ -40,6 +69,8 @@ ActiveRecord::Schema.define(version: 20140904150413) do
     t.date     "expiration_date"
     t.string   "status"
     t.date     "last_date_updated"
+    t.boolean  "is_reagent_kit"
+    t.integer  "child_items_no"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

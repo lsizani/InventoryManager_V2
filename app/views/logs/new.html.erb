@@ -1,0 +1,30 @@
+
+
+<table>
+  <thead>
+    <td>Number</td>
+    <td>Item Lot No</td>
+    <td>Date Received</td>
+    <td>Expiry Date</td>
+    <td>Date Opened</td>
+    <td>Opened By: </td>
+    <td>For Study: </td>
+    <td></td>
+  </thead>
+  <tbody>
+    <%= form_for :log,  url: logs_path do |l| %>
+      <tr>
+        <td><%= l.text_field :number, value: '1' %></td>
+        <td><%= l.text_field :item_lot_no, value: @reagent.item_lot_no, :readonly=> true %></td>
+        <td><%= l.text_field :received_date, value: @reagent.received_date , :readonly=> true %></td>
+        <td><%= l.text_field :expiration_date, value: @reagent.expiration_date , :readonly=> true%></td>
+        <td><%= l.date_select :opened_date%></td>
+        <td><%= l.text_field  :opened_by, value: 'current user'%></td>
+        <td><%= l.text_field  :for_study%></td>
+        <%= hidden_field_tag 'reagent_id', @reagent.id %>
+        <td><%= l.submit %></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>

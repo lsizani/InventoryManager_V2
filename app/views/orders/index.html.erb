@@ -13,10 +13,8 @@
     <td>Order Status</td>
     <td>Order Number</td>
     <td>Catalog Number</td>
-    <td>Lot Number</td>
     <td>Manufacturer</td>
     <td>Supplier</td>
-    <td>Last Date Updated</td>
     <td>Edit / Place Order</td>
    </tr>
   </thead>
@@ -35,10 +33,8 @@
             <td><%=order.status %></td>
             <td><%=order.order_no %></td>
             <td><%=order.catalog_no %></td>
-            <td><%=order.lot_no %></td>
             <td><%=order.manufacturer %></td>
             <td><%=order.supplier %></td>
-            <td><%=order.last_date_updated %></td>
             <td>
               <p>
                 <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :id => order.id %>

@@ -2,6 +2,11 @@ class RequestsController < ApplicationController
 
   def index
      @requests = Request.all
+     if params[:order].blank?
+       @requests = @requests.all
+     else
+       @requests = @requests.order(params[:order])
+     end
   end
 
   def new

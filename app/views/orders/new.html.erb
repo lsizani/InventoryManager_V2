@@ -7,33 +7,54 @@
     <strong>Requested Date: </strong><%= @request.requested_date  %><br>
     <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
     <strong>Requested For Study:  </strong><%= @request.requested_for_study %> <br>
-    <%if %>
   </pre>
 
 <%= form_for :order, url: orders_path do |o| %>
     <p>
       <%= o.label :order_No %>
-      <%= o.text_field :order_no %>  |
+      <%= o.text_field :order_no, :class => "required"  %>  |
       <%= o.label :ordered_Date %>
-      <%= o.date_select :ordered_date %>
+      <%= o.date_select :ordered_date, :class => "required" %>
     </p>
-       <% if @request.catalog_no.blank? %>
-    <p>
-      <%= o.label :catalog_No %>
-      <%= o.text_field :catalog_no %>
-    </p>
-    <p>
-      <%= o.label :manufacturer %>
-      <%= o.text_field :manufacturer %>
 
-      <%= o.label :supplier %>
-      <%= o.text_field :supplier %>
-    </p>
-        <% end %>
     <p>
       <%= o.label :ordered_Amount %>
-      <%= o.text_field :ordered_amount %>
+      <%= o.text_field :ordered_amount, :class => "required" %> |
+      <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
     </p>
+
+    <p>
+      <%= o.label :catalog_No %>
+      <% if @request.catalog_no.blank? %>
+        <%= o.text_field :catalog_no %>
+      <% else %>
+        : <%= @request.catalog_no %>
+      <% end %>
+
+      &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <%= o.label :manufacturer %>
+      <% if @request.manufacturer.blank? %>
+        <%= o.text_field :manufacturer %>
+      <% else %>
+        : <%= @request.manufacturer %>
+      <% end %>
+      &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;
+        <%= o.label :supplier %>
+      <% if @request.supplier.blank? %>
+        <%= o.text_field :supplier %>
+      <% else %>
+       :  <%= @request.supplier %>
+      <% end %>
+    </p>
+    <p>
+      <%= o.label :order_Cost %>
+      R <%= o.text_field :catalog_amount, :class => "required" %> |
+
+    </p>
+
+
+
         <%= hidden_field_tag 'request_id', @request.id %>
       <%= o.submit %>
 <% end %>

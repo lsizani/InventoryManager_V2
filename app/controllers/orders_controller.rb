@@ -32,7 +32,8 @@ class OrdersController < ApplicationController
 
   private
   def create_params
-      params.require(:order).permit(:lot_no, :order_no, :catalog_no, :manufacturer, :supplier, :ordered_date, :ordered_amount)
+      params.require(:order).permit(:lot_no, :order_no, :catalog_no, :manufacturer, :supplier, :ordered_date,
+                                    :ordered_amount, :catalog_amount)
   end
 
   #
@@ -41,10 +42,21 @@ class OrdersController < ApplicationController
   #
   private
   def update_now(record, request_id)
-    re = Order.find_by(id: record.id)
-    re.update(request_id:request_id,last_date_updated:Date.today, status:'Ordered')
+    order = Order.find_by(id: record.id)
+    order.update(request_id:request_id,last_date_updated:Date.today, status:'Ordered')
 
     re = Request.find_by(id: request_id)
     re.update(last_update_date:Date.today, status:'Ordered')
+
+    if order.supplier.blank?
+      order.update(supplier: re.supplier)
+    end
+    if order.manufacturer.blank?
+      order.update(manufacturer: re.manufacturer)
+    end
+    if order.catalog_no.blank?
+      order.update(catalog_no: re.catalog_no)
+    end
+
   end
 end

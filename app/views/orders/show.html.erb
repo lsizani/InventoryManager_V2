@@ -3,13 +3,14 @@
 <p>
   Order Number: <%= @order.order_no %>
 
-  Lot Number: <%= @order.lot_no  %>
 </p>
 
 <p>
-  Catalog Number: <%= @order.catalog_no %>
+  Catalog Number: <%= @order.catalog_no %>   |
 
-  Ordered Amount: <%= @order.ordered_amount %>
+  Ordered Amount: <%= @order.ordered_amount %> |
+
+  Order Cost: R <%= @order.catalog_amount %>
 
 </p>
 
@@ -25,6 +26,6 @@
 </p>
 
 <p>
-  <%= link_to "Home", :controller => "welcome", :action => "index" %>
-  <%= link_to "View All Orders", :controller => "orders", :action => "index" %>
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index' %>
+  <%= link_to 'View All Orders', :controller => 'orders', :action => 'index' %>
 </p>

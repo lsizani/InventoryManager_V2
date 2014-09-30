@@ -18,7 +18,11 @@ class ReagentsController < ApplicationController
     @reagent = Reagent.new(create_params)
     if @reagent.save
       update_now(@reagent, params[:order_id])
-      redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id
+      if@reagent.is_reagent_kit
+        redirect_to :controller => 'kit_items' , :action => 'new', :reagent_id=> @reagent.id
+      else
+        redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id
+      end
     end
 
   end
@@ -35,14 +39,14 @@ class ReagentsController < ApplicationController
   private
   def create_params
     params.require(:reagent).permit(:received_date, :expiration_date, :item_lot_no, :item_cat_no, :storage_temp_kit,
-                                    :storage_location, :delivered_amount, :po_order_no)
+                                    :storage_location, :delivered_amount, :po_order_no, :is_reagent_kit)
 
   end
 
   private
   def update_now(reagent, id)
     re = Reagent.find(reagent.id)
-    re.update(order_id:id, last_date_updated:Date.today)
+    re.update(order_id:id, last_date_updated:Date.today, amount_left:re.delivered_amount)
 
     order = Order.find(id)
     order.update(status:'Delivered')

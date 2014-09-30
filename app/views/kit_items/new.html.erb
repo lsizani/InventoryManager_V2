@@ -1,0 +1,46 @@
+<h1>Log Reagent Kit Contents: <%=  @reagent.item_lot_no  %></h1>
+
+<table align="center">
+  <thead>
+    <td>Item Name/Desc</td>
+    <td>Item Lot Number</td>
+    <td>Item Category Number</td>
+    <td>Item Expiration Date</td>
+    <td>Item Storage Temp</td>
+    <td>Item Storage Location</td>
+    <td>Item Last Date Updated</td>
+  </thead>
+  <tbody id="altColors">
+  <% if @items != nil %>
+    <% @items.each do |i| %>
+        <tr>
+          <td> <%= i.item_name %></td>
+          <td> <%= i.item_lot_no %></td>
+          <td> <%= i.item_cat_no %></td>
+          <td> <%= i.item_expiration_date %></td>
+          <td> <%= i.item_storage_temp %></td>
+          <td> <%= i.item_storage_location %></td>
+          <td> <%= i.last_date_updated %></td>
+        </tr>
+    <% end %>
+   <% end %>
+  <%= form_for :kit_item, url: kit_items_path do |it| %>
+        <tr>
+          <td><%= it.text_field :item_name  %></td>
+          <td><%= it.text_field :item_lot_no  %></td>
+          <td><%= it.text_field :item_cat_no  %></td>
+          <td><%= it.date_select :item_expiration_date  %></td>
+          <td><%= it.text_field :item_storage_temp  %> &deg;<strong>C</strong></td>
+          <td><%= it.text_field :item_storage_location %></td>
+          <%= hidden_field_tag 'reagent_id', @reagent.id %>
+          <td> <%= it.submit %></td>
+        </tr>
+   <% end %>
+  </tbody>
+</table>
+<br>
+<div class="navBox">
+  <%= link_to 'Done', :controller => 'kit_items', :action => 'index', :reagent_id => @reagent.id%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

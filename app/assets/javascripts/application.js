@@ -17,7 +17,6 @@
 
 function altRows(id){
     if(document.getElementsByTagName){
-
        var table = document.getElementById(id);
        var rows = table.getElementsByTagName("tr");
 
@@ -30,6 +29,7 @@ function altRows(id){
        }
     }
 }
+
 
 window.onload = function(){
     altRows("altColors");

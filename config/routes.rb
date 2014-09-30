@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 InventoryManagerV2::Application.routes.draw do
   get 'reagents/index'
 
-    resources :requests, :orders, :reagents
+    resources :requests, :orders, :reagents, :kit_items, :logs
     root 'welcome#index'
   end
   # The priority is based upon order of creation: first created -> highest priority.

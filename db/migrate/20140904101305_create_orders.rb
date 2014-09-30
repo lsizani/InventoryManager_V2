@@ -4,7 +4,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer  :request_id
       t.string   :order_no
       t.string   :catalog_no
-      t.string   :lot_no
+      t.decimal  :catalog_amount
       t.string   :manufacturer
       t.string   :supplier
       t.decimal  :ordered_amount

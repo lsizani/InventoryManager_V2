@@ -2,6 +2,7 @@
 
 
 <%= form_for :request, url: requests_path do |r| %>
+
     <% if @request.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@request.errors.count, 'error') %> prohibited
@@ -15,7 +16,7 @@
     <% end %>
     <p>
       <%= r.label :requested_By %>
-      <%= r.text_field :requested_by %>
+      <%= r.text_field :requested_by, :class => 'required' %>
       |
       <%= r.label :requested_Date %>
       <%= r.date_select :requested_date  %>
@@ -23,19 +24,19 @@
 
     <p>
       <%= r.label :reagent_Name %>
-      <%= r.text_field :reagent_name %>
+      <%= r.text_field :reagent_name, :class => 'required' %>
       |
       <%= r.label :requested_Amount %>
-      <%= r.text_field :requested_amount %>
+      <%= r.text_field :requested_amount, :class => 'required' %>
 
     </p>
 
-    </p>
-      <%= r.label :requested_For_Study %>
-      <%= r.text_field :requested_for_study %>
     <p>
-
+      <%= r.label :requested_For_Study %>
+      <%= r.text_field :requested_for_study, :class => 'required' %>
     </p>
+
+    <p>
       <%= r.label :catalog_No %>
       <%= r.text_field :catalog_no %>  |
 
@@ -44,7 +45,7 @@
 
       <%= r.label :supplier %>
       <%= r.text_field :supplier %> |
-    <p>
+    </p>
 
         <%= r.submit %>
 <% end %>

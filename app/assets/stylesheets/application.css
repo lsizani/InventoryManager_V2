@@ -20,6 +20,10 @@
     overflow: scroll;
 }
 
+.required{
+    border: 1px solid red;
+}
+
 .homeBox{
     text-align: center;
     font-size: 25px;
@@ -120,6 +124,6 @@ form{
     font-weight: bold;
     font-size: 20px;
     border: 1px solid #000000;
-    width: 800px;
+    width: 950px;
     padding: 20px;
 }

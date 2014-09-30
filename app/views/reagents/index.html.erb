@@ -7,6 +7,7 @@
       <td>Item Cat No</td>
       <td>Amount Delivered</td>
       <td>Amount Left</td>
+      <td>Kit/Item Log</td>
       <td>Received Date</td>
       <td>Expiration Date</td>
       <td>Storage Location</td>
@@ -24,6 +25,11 @@
                         <td> <%=reagent.item_cat_no%> </td>
                         <td> <%=reagent.delivered_amount%> </td>
                         <td> <%=reagent.amount_left%> </td>
+                        <% if reagent.is_reagent_kit%>
+                            <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => reagent.id %> </td>
+                        <% else %>
+                            <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => reagent.id %></td>
+                        <% end %>
                         <td> <%=reagent.received_date%> </td>
                         <td> <%=reagent.expiration_date%> </td>
                         <td> <%=reagent.storage_location%> </td>

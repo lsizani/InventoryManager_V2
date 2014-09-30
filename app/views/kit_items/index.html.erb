@@ -1,0 +1,34 @@
+<h1>Reagent Kit Contents: <%=  @reagent.item_lot_no  %></h1>
+
+<table align="center">
+  <thead>
+  <td>Item Name/Desc</td>
+  <td>Item Lot Number</td>
+  <td>Item Category Number</td>
+  <td>Item Expiration Date</td>
+  <td>Item Storage Temp</td>
+  <td>Item Storage Location</td>
+  <td>Item Last Date Updated</td>
+  </thead>
+  <tbody id="altColors">
+  <% if @items != nil %>
+      <% @items.each do |i| %>
+          <tr>
+            <td> <%= link_to i.item_name, :controller => 'logs', :action => 'index', :reagent_id => @reagent.id %></td>
+            <td> <%= i.item_lot_no %></td>
+            <td> <%= i.item_cat_no %></td>
+            <td> <%= i.item_expiration_date %></td>
+            <td> <%= i.item_storage_temp %></td>
+            <td> <%= i.item_storage_location %></td>
+            <td> <%= i.last_date_updated %></td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<div class="navBox">
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>
