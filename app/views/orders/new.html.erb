@@ -10,6 +10,19 @@
   </pre>
 
 <%= form_for :order, url: orders_path do |o| %>
+
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, 'error') %> prohibited
+            this request from being saved:</h2>
+          <ul>
+            <% @order.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
     <p>
       <%= o.label :order_No %>
       <%= o.text_field :order_no, :class => "required"  %>  |

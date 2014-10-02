@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   def new
      @request = Request.find_by(id: params[:id])
+     @order = Order.new
 
   end
 
@@ -19,11 +20,15 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @request = Request.find_by(id: params[:request_id])
     @order = Order.new(create_params)
     if @order.save
       update_now(@order, params[:request_id])
+      render @order
+    else
+      render :controller => 'orders', :action => 'new', :id => @request.id
     end
-    redirect_to @order
+
   end
 
   def show

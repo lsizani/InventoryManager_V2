@@ -37,7 +37,7 @@
             <td><%=order.supplier %></td>
             <td>
               <p>
-                <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :id => order.id %>
+                <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :order_id => order.id %>
               </p>
             </td>
           </tr>

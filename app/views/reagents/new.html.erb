@@ -15,13 +15,21 @@
 </p>
 
 <%= form_for :reagent, url: reagents_path do |r| %>
-   <p>
+    <% if @reagent.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@reagent.errors.count, 'error') %> prohibited
+            this reagent from being saved:
+          </h2>
+          <ul>
+            <% @reagent.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <p>
      <%= r.label :is_this_a_kit_or_single_item? %>
-     <%= r.select :is_reagent_kit, {:Item => 'false', :Kit => 'true'},{}, {:class => 'required'} %> |
-
-
-     <%= r.label :How_many_items_in_kit? %>
-     <%= r.text_field :reps%>
+     <%= r.select :is_reagent_kit, {:Item => 'false', :Kit => 'true'},{}, {:class => 'required'} %>
 
    </p>
    <p>

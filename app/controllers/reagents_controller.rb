@@ -10,11 +10,15 @@ class ReagentsController < ApplicationController
   end
 
   def new
-    @order = Order.find(params[:id])
+    @reagent = Reagent.new
+    @order = Order.find(params[:order_id])
     @request = Request.find(@order.request_id)
   end
 
   def create
+    @order = Order.find(params[:order_id])
+    @request = Request.find(@order.request_id)
+
     @reagent = Reagent.new(create_params)
     if @reagent.save
       update_now(@reagent, params[:order_id])
@@ -23,6 +27,8 @@ class ReagentsController < ApplicationController
       else
         redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id
       end
+    else
+      render :controller => 'reagents', :action => 'new', :order_id => params[:order_id]
     end
 
   end
