@@ -25,7 +25,7 @@
                         <td> <%=reagent.item_cat_no%> </td>
                         <td> <%=reagent.delivered_amount%> </td>
                         <td> <%=reagent.amount_left%> </td>
-                        <% if reagent.is_reagent_kit%>
+                        <% if request.is_reagent_kit %>
                             <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => reagent.id %> </td>
                         <% else %>
                             <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => reagent.id %></td>

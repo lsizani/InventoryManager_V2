@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     @order = Order.new(create_params)
     if @order.save
       update_now(@order, params[:request_id])
-      render @order
+      redirect_to @order
     else
       render :controller => 'orders', :action => 'new', :id => @request.id
     end

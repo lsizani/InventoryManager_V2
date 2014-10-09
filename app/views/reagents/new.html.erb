@@ -27,11 +27,6 @@
           </ul>
         </div>
     <% end %>
-    <p>
-     <%= r.label :is_this_a_kit_or_single_item? %>
-     <%= r.select :is_reagent_kit, {:Item => 'false', :Kit => 'true'},{}, {:class => 'required'} %>
-
-   </p>
    <p>
      <%= r.label :received_Date %>
      <%= r.date_select :received_date %>

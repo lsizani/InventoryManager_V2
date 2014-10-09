@@ -48,7 +48,7 @@ class RequestsController < ApplicationController
   private
   def request_args
      params.require(:request).permit(:requested_by, :requested_date, :reagent_name, :requested_amount, :requested_for_study,
-                                     :catalog_no, :manufacturer, :supplier)
+                                     :catalog_no, :manufacturer, :supplier, :is_reagent_kit)
   end
 
 

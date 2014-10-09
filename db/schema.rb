@@ -69,8 +69,6 @@ ActiveRecord::Schema.define(version: 20140919055631) do
     t.date     "expiration_date"
     t.string   "status"
     t.date     "last_date_updated"
-    t.boolean  "is_reagent_kit"
-    t.integer  "child_items_no"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -86,6 +84,8 @@ ActiveRecord::Schema.define(version: 20140919055631) do
     t.string   "catalog_no"
     t.string   "manufacturer"
     t.string   "supplier"
+    t.boolean  "is_reagent_kit"
+    t.integer  "child_items_no"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

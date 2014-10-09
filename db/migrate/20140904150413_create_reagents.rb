@@ -14,9 +14,6 @@ class CreateReagents < ActiveRecord::Migration
       t.string    :status
       t.date      :last_date_updated
 
-      #the following fields are for a kit reagent i.e not a single item
-      t.boolean   :is_reagent_kit
-      t.integer   :child_items_no
       t.timestamps
     end
   end

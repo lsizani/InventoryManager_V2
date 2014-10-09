@@ -2,7 +2,7 @@ class ReagentsController < ApplicationController
   def index
      @reagents = Reagent.all
      @orders = Order.select('id, request_id').where("status='Delivered'")
-     @requests = Request.select('id, reagent_name').where("status='Delivered'")
+     @requests = Request.select('id, reagent_name, is_reagent_kit').where("status='Delivered'")
   end
 
   def edit
@@ -22,7 +22,7 @@ class ReagentsController < ApplicationController
     @reagent = Reagent.new(create_params)
     if @reagent.save
       update_now(@reagent, params[:order_id])
-      if@reagent.is_reagent_kit
+      if@request.is_reagent_kit
         redirect_to :controller => 'kit_items' , :action => 'new', :reagent_id=> @reagent.id
       else
         redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id

@@ -1,6 +1,7 @@
 <h1>Enter Reagent Request Detail:</h1>
 
 
+
 <%= form_for :request, url: requests_path do |r| %>
 
     <% if @request.errors.any? %>
@@ -14,12 +15,18 @@
           </ul>
         </div>
     <% end %>
+
     <p>
       <%= r.label :requested_By %>
       <%= r.text_field :requested_by, :class => 'required' %>
       |
       <%= r.label :requested_Date %>
       <%= r.date_select :requested_date  %>
+    </p>
+    <p class ='required'>
+      <%= r.label :kit_or_single_item? %>  <br>
+      Kit: <%= r.radio_button :is_reagent_kit, 'true' %>
+      Single Item: <%= r.radio_button :is_reagent_kit, 'false' %>
     </p>
 
     <p>
