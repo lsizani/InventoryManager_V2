@@ -33,6 +33,14 @@
 
 
 }
+
+.adminBox{
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+    vertical-align: bottom;
+}
+
 .navBox{
     text-align: center;
     font-size: 18px;

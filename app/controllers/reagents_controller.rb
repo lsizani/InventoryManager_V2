@@ -42,6 +42,10 @@ class ReagentsController < ApplicationController
       @qr = RQRCode::QRCode.new( code, :size => 4, :level => :h )
   end
 
+  def show_reagent
+    redirect_to :controller => 'reagents' , :action => 'show', :id=> params[:id]
+  end
+
   private
   def create_params
     params.require(:reagent).permit(:received_date, :expiration_date, :item_lot_no, :item_cat_no, :storage_temp_kit,

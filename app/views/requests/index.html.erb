@@ -16,7 +16,13 @@
   <tbody id="altColors">
     <% @requests.each do |request| %>
         <tr>
-          <td><%=request.reagent_name %></td>
+          <td>
+            <% if request.status == 'Delivered' %>
+                <%= link_to "#{request.reagent_name}", :controller => 'reagents', :action => 'show', :id=> request.id %>
+            <% else %>
+                <%= request.reagent_name %>
+            <% end %>
+          </td>
           <td><%=request.requested_by %></td>
           <td><%=request.requested_for_study %></td>
           <td><%=request.requested_amount %></td>
@@ -25,8 +31,9 @@
           <td><%=request.last_update_date %></td>
           <td>
             <p>
-              <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %> |
-
+              <% if request.status == 'Requested'%>
+                <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %> |
+              <% end %>
               <% if request.status != 'Ordered' and request.status != 'Delivered' %>
                 <%= link_to 'Order reagent', :controller => 'orders', :action => 'edit', :id => request.id %>
               <% else %>

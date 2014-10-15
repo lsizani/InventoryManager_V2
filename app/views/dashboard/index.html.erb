@@ -1,0 +1,16 @@
+<h1>Perform Admin Task</h1>
+
+<h2>All Studies in Logs</h2>
+
+<table>
+  <thead>
+
+  </thead>
+  <tbody>
+    <% @studies.each do |study| %>
+       <tr>
+         <td><%= study.requested_for_study %></td>
+       </tr>
+    <% end %>
+  </tbody>
+</table>

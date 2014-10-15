@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   get 'reagents/index'
 
 InventoryManagerV2::Application.routes.draw do
-  get 'reagents/index'
-
-    resources :requests, :orders, :reagents, :kit_items, :logs
+  #get 'reagents/index'
+  namespace :admin do
+    root 'admin#index'
+  end
+    resources :requests, :orders, :reagents, :kit_items, :logs, :dashboard
     root 'welcome#index'
   end
   # The priority is based upon order of creation: first created -> highest priority.
