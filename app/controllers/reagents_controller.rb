@@ -1,12 +1,27 @@
 class ReagentsController < ApplicationController
   def index
      @reagents = Reagent.all
-     @orders = Order.select('id, request_id').where("status='Delivered'")
-     @requests = Request.select('id, reagent_name, is_reagent_kit').where("status='Delivered'")
+     @orders = Order.select('id, request_id').where("status='Delivered' OR status='OBO'")
+     @requests = Request.select('id, reagent_name, is_reagent_kit').where("status='Delivered' OR status='OBO'")
   end
 
   def edit
-    redirect_to :controller => 'reagents' , :action => 'new', :id=> params[:id]
+    @order = Order.find(params[:id])
+    @reagent = Reagent.find_by(order_id:@order.id)
+    @request = Request.find(@order.request_id)
+  end
+
+  def update
+     @reagent = Reagent.find(params[:id])
+     @order = Order.find(params[:order_id])
+     @request = Request.find(@order.request_id)
+
+     if @reagent.update(create_params)
+       update_now(@request, params[:order_id])
+       redirect_to :controller => 'requests', :action =>   'show', :id => @request.id
+     else
+       redirect_to :controller => 'requests', :action =>   'edit', :id => @request.id
+     end
   end
 
   def new
@@ -38,7 +53,7 @@ class ReagentsController < ApplicationController
       @order = Order.find_by(id: @reagent.order_id)
       @request = Request.find_by(id: @order.request_id)
 
-      code = make_code(@reagent, @order, @request)
+      code = make_code(@order, @request)
       @qr = RQRCode::QRCode.new( code, :size => 4, :level => :h )
   end
 
@@ -54,20 +69,52 @@ class ReagentsController < ApplicationController
   end
 
   private
-  def update_now(reagent, id)
+  def update_now(reagent, order_id)
     re = Reagent.find(reagent.id)
-    re.update(order_id:id, last_date_updated:Date.today, amount_left:re.delivered_amount)
-
-    order = Order.find(id)
-    order.update(status:'Delivered')
-
+    order = Order.find(order_id)
     request = Request.find(order.request_id)
-    request.update(status:'Delivered')
+    amount_left = 0
+    bo_amount = 0
+    bo_status = false
+    status = ''
+
+    #if order.on_back_order then we're editing a reagent
+    if order.on_back_order
+      #if we're here then this is to update a back ordered reagent
+      #check if delivery amount <= requested amount:
+      if order.back_order_amount == reagent.delivered_amount
+        #if all the requested quantity has been delivered
+        amount_left = re.amount_left + reagent.delivered_amount
+        status = 'Delivered'
+      end
+      if order.back_order_amount > reagent.delivered_amount
+        amount_left = re.amount_left + reagent.delivered_amount
+        status = 'OBO'
+      end
+
+    else
+      if order.ordered_amount == reagent.delivered_amount
+        status = 'Delivered'
+        bo_status = false
+        bo_amount = 0
+        amount_left = reagent.delivered_amount
+      end
+      if order.ordered_amount < reagent.delivered_amount
+        status = 'OBO'
+        bo_status = true
+        bo_amount = order.ordered_amount - reagent.delivered_amount
+        amount_left = reagent.delivered_amount
+      end
+    end
+
+    re.update(order_id: order_id, amount_left: amount_left, last_date_updated: Date.today)
+    order.update(on_back_order: bo_status, back_order_delivery_date: Date.today, back_order_amount: bo_amount, status: status)
+    request.update(status:status)
+
   end
 
   private
-  def make_code(reagent, order, request)
-    text = "Request ID: #{request.id} Order ID: #{order.id}"
-    return text
+  def make_code(order, request)
+      "Request ID: #{request.id} Order ID: #{order.id}"
   end
 end

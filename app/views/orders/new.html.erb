@@ -1,4 +1,4 @@
-<h1>Place Order for Reagent Request <%= @request.reagent_name %></h1>
+<h1>Place Order for  <%= @request.reagent_name %></h1>
 
 
   <pre>
@@ -25,14 +25,14 @@
 
     <p>
       <%= o.label :order_No %>
-      <%= o.text_field :order_no, :class => "required"  %>  |
+      <%= o.text_field :order_no, :class => 'required'  %>  |
       <%= o.label :ordered_Date %>
-      <%= o.date_select :ordered_date, :class => "required" %>
+      <%= o.date_select :ordered_date, :class => 'required' %>
     </p>
 
     <p>
       <%= o.label :ordered_Amount %>
-      <%= o.text_field :ordered_amount, :class => "required" %> |
+      <%= o.text_field :ordered_amount, :class => 'required' %> |
       <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
     </p>
 
@@ -61,13 +61,9 @@
       <% end %>
     </p>
     <p>
-      <%= o.label :order_Cost %>
-      R <%= o.text_field :catalog_amount, :class => 'required' %> |
-
+      <%= o.label :unit_Price %>
+      R <%= o.text_field :unit_price, :class => 'required' %> |
     </p>
-
-
-
         <%= hidden_field_tag 'request_id', @request.id %>
       <%= o.submit %>
 <% end %>

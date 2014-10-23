@@ -18,6 +18,8 @@ class RequestsController < ApplicationController
 
     if @request.save
       update_now(@request)
+
+      NoticeMailer.notify_new_request(@request).deliver
       redirect_to :controller => 'requests', :action =>   'show', :id => @request.id
     else
       render :controller => 'requests', :action => 'new'

@@ -2,7 +2,7 @@ class KitItemsController < ApplicationController
 
   def index
     @reagent = Reagent.find(params[:reagent_id])
-    @items = KitItem.where("reagent_id=" + params[:reagent_id])
+    @items = KitItem.where("reagent_id=" + params[:reagent_id] +" AND is_item_used='false'")
   end
 
   def new

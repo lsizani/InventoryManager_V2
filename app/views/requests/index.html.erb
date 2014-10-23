@@ -31,10 +31,10 @@
           <td><%=request.last_update_date %></td>
           <td>
             <p>
-              <% if request.status == 'Requested'%>
+              <% if request.status == 'Requested' and request.status != 'Ordered' and request.status!= 'OBO'%>
                 <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %> |
               <% end %>
-              <% if request.status != 'Ordered' and request.status != 'Delivered' %>
+              <% if request.status != 'Ordered' and request.status != 'Delivered' and request.status != 'OBO'%>
                 <%= link_to 'Order reagent', :controller => 'orders', :action => 'edit', :id => request.id %>
               <% else %>
                   <%= link_to 'View order', :controller => 'orders', :action => 'show', :id=> request.id %>

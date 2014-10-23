@@ -1,4 +1,4 @@
-<h1>Log New Reagent</h1>
+<h1>Delivery Log for <%= @request.reagent_name %></h1>
 
 <p>
   <strong>Requested By:</strong> <%= @request.requested_by %>    <strong>Order Number: </strong> <%= @order.order_no %><br>
@@ -40,7 +40,7 @@
       <%= r.text_field :item_lot_no %>
 
       <%= r.label :cat_Number %>
-      <%= r.text_field :item_cat_no %>
+      <%= r.text_field :item_cat_no, :value => @order.catalog_no %>
     </p>
 
     <p>

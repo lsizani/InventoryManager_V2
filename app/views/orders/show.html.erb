@@ -1,4 +1,4 @@
-<h1>Order Created</h1>
+<h1><%= @request.reagent_name %> Order Summary </h1>
 
 <p>
   Order Number: <%= @order.order_no %>
@@ -10,7 +10,7 @@
 
   Ordered Amount: <%= @order.ordered_amount %> |
 
-  Order Cost: R <%= @order.catalog_amount %>
+  Unit Price: R <%= @order.unit_price %> | Total: R <%=  "#{@order.unit_price * @order.ordered_amount}" %>
 
 </p>
 

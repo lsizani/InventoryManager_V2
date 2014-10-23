@@ -11,7 +11,7 @@ class CreateKitItems < ActiveRecord::Migration
       t.date     :last_date_updated
 
       #the following fields are for the reagent log sheet
-      t.boolean  :is_item_used    #must default to false
+      t.boolean  :is_item_used, :default => false   #must default to false
       t.date     :date_opened
       t.string   :used_by
       t.timestamps

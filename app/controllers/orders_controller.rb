@@ -1,10 +1,8 @@
 class OrdersController < ApplicationController
 
   def index
-
      @orders = Order.all
-     @requests = Request.where("status='Ordered'")
-
+     @requests = Request.where("status='Ordered' OR status='OBO'")
   end
 
   def new
@@ -14,10 +12,10 @@ class OrdersController < ApplicationController
   end
 
   def edit
-
     @request = Request.find_by(id: params[:id])
     redirect_to :controller => 'orders', :action => 'new', :id => @request.id
   end
+
 
   def create
     @request = Request.find_by(id: params[:request_id])
@@ -33,12 +31,13 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @request = Request.find(@order.request_id)
   end
 
   private
   def create_params
       params.require(:order).permit(:lot_no, :order_no, :catalog_no, :manufacturer, :supplier, :ordered_date,
-                                    :ordered_amount, :catalog_amount)
+                                    :ordered_amount, :unit_price)
   end
 
   #

@@ -14,7 +14,7 @@
   <% if @items != nil %>
       <% @items.each do |i| %>
           <tr>
-            <td> <%= link_to i.item_name, :controller => 'logs', :action => 'index', :reagent_id => @reagent.id %></td>
+            <td> <%= link_to i.item_name, :controller => 'logs', :action => 'index', :reagent_id => @reagent.id, :id => i.id %></td>
             <td> <%= i.item_lot_no %></td>
             <td> <%= i.item_cat_no %></td>
             <td> <%= i.item_expiration_date %></td>

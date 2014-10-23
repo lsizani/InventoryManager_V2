@@ -22,6 +22,7 @@
         <td><%= l.text_field  :opened_by, value: 'current user'%></td>
         <td><%= l.text_field  :for_study%></td>
         <%= hidden_field_tag 'reagent_id', @reagent.id %>
+        <%= hidden_field_tag 'kit_item_id', @kit_item.id %>
         <td><%= l.submit %></td>
       </tr>
 

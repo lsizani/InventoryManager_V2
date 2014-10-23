@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140919055631) do
     t.decimal  "item_storage_temp"
     t.string   "item_storage_location"
     t.date     "last_date_updated"
-    t.boolean  "is_item_used"
+    t.boolean  "is_item_used",          default: false
     t.date     "date_opened"
     t.string   "used_by"
     t.datetime "created_at"
@@ -46,10 +46,13 @@ ActiveRecord::Schema.define(version: 20140919055631) do
     t.integer  "request_id"
     t.string   "order_no"
     t.string   "catalog_no"
-    t.decimal  "catalog_amount"
+    t.decimal  "unit_price"
     t.string   "manufacturer"
     t.string   "supplier"
     t.decimal  "ordered_amount"
+    t.boolean  "on_back_order"
+    t.decimal  "back_order_amount",        default: 0.0
+    t.decimal  "back_order_delivery_date"
     t.date     "ordered_date"
     t.date     "last_date_updated"
     t.string   "status"
