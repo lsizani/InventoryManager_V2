@@ -1,7 +1,7 @@
 <h1>Reagent Log: <%= @reagent.item_lot_no  %></h1>
 <% if @log.nil? or @log.count < 1 %>
     <h1>No Log Entries</h1>
-    <div class="navBox"><%= link_to 'New', :controller => 'logs', :action => 'new', :reagent_id => @reagent_id %> |
+    <div class="navBox"><%= link_to 'New', :controller => 'logs', :action => 'new', :reagent_id => @reagent_id, :id => params[:id] %> |
        <%= link_to 'Back', :controller => 'reagents', :action => 'index' %>
     </div>
 <% else %>

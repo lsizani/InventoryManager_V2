@@ -1,4 +1,10 @@
-<h1>Delivery Log for <%= @request.reagent_name %></h1>
+<h1>
+    <% if @request.is_reagent_kit %>
+      Delivery Log for <%= @request.reagent_name %>, Kit : <%= @rep_int %>
+    <% else %>
+      Delivery Log for <%= @request.reagent_name %>
+    <% end %>
+</h1>
 
 <p>
   <strong>Requested By:</strong> <%= @request.requested_by %>    <strong>Order Number: </strong> <%= @order.order_no %><br>
@@ -45,7 +51,7 @@
 
     <p>
       <%= r.label :storage_Temp %>
-      <%= r.text_field :storage_temp_kit %> &deg;<strong>C</strong>
+      <%= r.text_field :storage_temp_kit %> &deg;<strong>C</strong> |
 
       <%= r.label :storage_Location %>
       <%= r.text_field :storage_location, :class => "required" %>

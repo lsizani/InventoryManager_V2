@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   def index
      @orders = Order.all
-     @requests = Request.where("status='Ordered' OR status='OBO'")
+     @requests = Request.where(status:['Ordered','OBO'])
   end
 
   def new

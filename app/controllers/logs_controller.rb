@@ -3,7 +3,7 @@ class LogsController < ApplicationController
   def index
     @reagent_id =  params[:reagent_id]
     @reagent = Reagent.find(@reagent_id)
-    @log = Log.where("reagent_id=" + params[:reagent_id])
+    @log = Log.where(:reagent_id =>  params[:reagent_id])
 
   end
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>A new reagent request has been logged: </h1>
+
+<h2><underline><%= @request.reagent_name %> Request Summary</underline></h2>
+
+<p>
+  Requested By: <%= @request.requested_by %> <br>
+  Requested Date: <%= @request.requested_date  %>
+</p>
+
+<p>
+  Reagent Name:  <%= @request.reagent_name %> <br>
+  Requested_Amount: <%= @request.requested_amount %>
+</p>
+
+<p>
+  Requested For Study:  <%= @request.requested_for_study %> <br>
+</p>
+    Click <%= link_to 'here', :controller => 'requests', :action => 'index' %> to view
+</body>
+</html>
