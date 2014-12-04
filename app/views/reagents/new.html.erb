@@ -1,6 +1,6 @@
 <h1>
     <% if @request.is_reagent_kit %>
-      Delivery Log for <%= @request.reagent_name %>, Kit : <%= @rep_int %>
+      Delivery Log for <%= @request.reagent_name %> Kit
     <% else %>
       Delivery Log for <%= @request.reagent_name %>
     <% end %>
@@ -19,6 +19,7 @@
 <p>
   <strong>Requested For Study:</strong>  <%= @request.requested_for_study %> <br>
 </p>
+
 
 <%= form_for :reagent, url: reagents_path do |r| %>
     <% if @reagent.errors.any? %>

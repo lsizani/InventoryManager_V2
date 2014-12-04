@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919055631) do
+ActiveRecord::Schema.define(version: 20141203163011) do
 
   create_table "kit_items", force: true do |t|
     t.integer  "reagent_id"
@@ -89,6 +89,14 @@ ActiveRecord::Schema.define(version: 20140919055631) do
     t.string   "supplier"
     t.boolean  "is_reagent_kit"
     t.integer  "child_items_no"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "studies", force: true do |t|
+    t.string   "study_name"
+    t.string   "study_number"
+    t.date     "study_start_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

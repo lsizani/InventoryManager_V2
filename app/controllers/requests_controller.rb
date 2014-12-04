@@ -18,8 +18,12 @@ class RequestsController < ApplicationController
 
     if @request.save
       update_now(@request)
+      begin
+        NoticeMailer.notify_new_request(@request).deliver
+      rescue Exception => e
+          logger.error("Message for the log file #{e.message}")
+      end
 
-      NoticeMailer.notify_new_request(@request).deliver
       redirect_to :controller => 'requests', :action =>   'show', :id => @request.id
     else
       render :controller => 'requests', :action => 'new'

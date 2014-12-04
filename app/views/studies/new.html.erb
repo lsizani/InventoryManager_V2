@@ -1,0 +1,24 @@
+<h1>Enter New Study Details: </h1>
+
+<table align="center">
+  <thead>
+  <td>Study ID</td>
+  <td>Study Name</td>
+  <td>Study Number</td>
+  <td>Study Start Date</td>
+  <td></td>
+  </thead>
+  <tbody>
+    <%= form_for :study, url: new_study_path do |std| %>
+      <td></td>
+      <td><%= std.text_field :study_name %></td>
+      <td><%= std.text_field :study_number %></td>
+      <td><%= std.date_select :study_start_date %></td>\
+      <td><%= std.submit %></td>
+    <% end %>
+  </tbody>
+</table>
+           <br>
+<div class="navBox">
+  <%= link_to 'Done', :controller => 'dashboard', :action => 'index'  %>
+</div>

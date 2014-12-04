@@ -12,7 +12,7 @@
     <td></td>
   </thead>
   <tbody>
-    <%= form_for :log,  url: logs_path do |l| %>
+    <%= form_for :log, url: reagent_logs_path do |l| %>
       <tr>
         <td><%= l.text_field :number, value: '1' %></td>
         <td><%= l.text_field :item_lot_no, value: @reagent.item_lot_no, :readonly=> true %></td>
@@ -22,7 +22,7 @@
         <td><%= l.text_field  :opened_by, value: 'current user'%></td>
         <td><%= l.text_field  :for_study%></td>
         <%= hidden_field_tag 'reagent_id', @reagent.id %>
-        <%= hidden_field_tag 'kit_item_id', @kit_item.id %>
+
         <td><%= l.submit %></td>
       </tr>
 

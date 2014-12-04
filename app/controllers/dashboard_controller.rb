@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-     @studies = Request.select('id, requested_for_study')
-
+     @studies = Study.all
   end
+
 end

@@ -1,8 +1,8 @@
 class ReagentsController < ApplicationController
   def index
      @reagents = Reagent.all
-     @orders = Order.select('id, request_id').where(status:['Delivered','OBO'])
-     @requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered','OBO'])
+     @orders = Order.select('id, request_id').where(status:['Delivered', 'OBO'])
+     @requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered', 'OBO'])
   end
 
   def edit
@@ -25,7 +25,6 @@ class ReagentsController < ApplicationController
   end
 
   def new
-    @rep_int = params[:rep_int]
     @reagent = Reagent.new
     @order = Order.find(params[:order_id])
     @request = Request.find(@order.request_id)
@@ -37,8 +36,10 @@ class ReagentsController < ApplicationController
 
     @reagent = Reagent.new(create_params)
     if @reagent.save
+
       update_now(@reagent, params[:order_id])
       if@request.is_reagent_kit
+
         redirect_to :controller => 'kit_items' , :action => 'new', :reagent_id=> @reagent.id
       else
         redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id

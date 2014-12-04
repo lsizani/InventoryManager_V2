@@ -22,7 +22,7 @@ Rails.application.configure do
       :domain => "synexa.local",
       :authentication => :login,
       :user_name => "lsizani",
-      :password => "N3l!sw@Mpo-V",
+      :password => "N3l!sw@Mpo-VI",
   }
 
   # Print deprecation notices to the Rails logger.
