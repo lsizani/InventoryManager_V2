@@ -1,27 +1,15 @@
-<h1>Perform Admin Task</h1>
+<h1>Admin Dashboard</h1>
 
-<h2>All Studies in Logs</h2>
 
-<table align="center">
-  <thead>
-       <td>Study ID</td>
-       <td>Study Name</td>
-       <td>Study Number</td>
-       <td>Study Start Date</td>
-  </thead>
-  <tbody>
-    <% @studies.each do |study| %>
-       <tr>
-         <td><%= study.id %></td>
-         <td><%= study.study_name %></td>
-         <td><%= study.study_number %></td>
-         <td><%= study.study_start_date %></td>
-       </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="homeBox">
+  <%= link_to 'Manage Studies', :controller => 'studies', :action => 'index'%>   |
 
-<div class="navBox">
-  <%= link_to 'Add Study', :controller => 'studies', :action => 'new'  %>  |
-  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+  <%= link_to 'Reports', :controller => 'reports', :action => 'index' %>       |
+
+  <%= link_to 'Another thing', :controller => 'reagents', :action => 'index'%>
+</div>
+
+<div class="adminBox">
+  <%= link_to 'Main Home', :controller => 'welcome', :action => 'index' %>
+
 </div>

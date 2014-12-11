@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require tablefilter_all_min
+
+
 
 
 function altRows(id){
@@ -33,4 +36,19 @@ function altRows(id){
 
 window.onload = function(){
     altRows("altColors");
+    setFilterGrid("filter");
+
+
+    //The following functions are called for the reports screen
+    altRows("altColors1");
+    setFilterGrid("filter1");
+
+    altRows("altColors2");
+    setFilterGrid("filter2");
+
+    altRows("altColors3");
+    setFilterGrid("filter3");
+
+    altRows("altColors4");
+    setFilterGrid("filter4");
 }

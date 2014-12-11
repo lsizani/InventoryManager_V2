@@ -40,7 +40,7 @@
 
     <p>
       <%= r.label :requested_For_Study %>
-      <%= r.text_field :requested_for_study, :class => 'required' %>
+      <%= r.collection_select(:requested_for_study, @studies, :study_name, :study_name, :include_blank => 'Please select', :class=> 'required') %>
     </p>
 
     <p>

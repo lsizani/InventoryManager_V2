@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails InventoryManager_V2: development" uuid="e8cca59f-6e65-4587-b5df-67bb91b30c08">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+    <data-source name="Rails InventoryManager_V2: test" uuid="014cd84f-111a-4630-b0c7-e9cff7eb3616">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+    <data-source name="Rails InventoryManager_V2: production" uuid="7092bfaa-6aba-4e79-9429-65e6d28d3721">
+      <first-sync>true</first-sync>
+      <user-name>rails_user</user-name>
+      <user-password>df9fdfd3dfc4df99dfd2dfeadff5df98df9adf9adf9b</user-password>
+    </data-source>
+  </component>
+</project>

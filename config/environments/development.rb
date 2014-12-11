@@ -21,8 +21,8 @@ Rails.application.configure do
       :port => 25,
       :domain => "synexa.local",
       :authentication => :login,
-      :user_name => "lsizani",
-      :password => "N3l!sw@Mpo-VI",
+      :user_name => "itmonitoring",
+      :password => "1tM0n1t0r1ng",
   }
 
   # Print deprecation notices to the Rails logger.

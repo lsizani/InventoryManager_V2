@@ -1,0 +1,8 @@
+<h1>New Study Details: </h1>
+
+<p>Name: <%= @study.study_name%></p>
+<p>Number: <%= @study.study_number%></p>
+<p>Starts : <%= @study.study_start_date %>  ...  Ends: <%= @study.study_end_date %></p>
+<div class="navBox">
+  <%= link_to 'Done', :controller => 'dashboard', :action => 'index'  %>
+</div>

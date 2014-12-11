@@ -1,8 +1,33 @@
 class ReagentsController < ApplicationController
   def index
-     @reagents = Reagent.all
-     @orders = Order.select('id, request_id').where(status:['Delivered', 'OBO'])
-     @requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered', 'OBO'])
+    @reagents = make_collection
+
+  end
+
+  private
+  def make_collection
+    reagents = Reagent.all
+    orders = Order.select('id, request_id').where(status:['Delivered', 'OBO'])
+    requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered', 'OBO'])
+    collection = Array.new
+
+    i = 0
+    reagents.each { |r|
+      orders.each{  |o|
+        if r.order_id == o.id
+          requests.each { |re|
+            if re.id == o.request_id
+              temp = ReagentObject.new
+              temp.set_vars(r,o,re)
+              collection[i] = temp
+              i = i + 1
+            end
+          }
+        end
+
+      }
+    }
+    collection
   end
 
   def edit
@@ -17,7 +42,7 @@ class ReagentsController < ApplicationController
      @request = Request.find(@order.request_id)
 
      if @reagent.update(create_params)
-       update_now(@request, params[:order_id])
+       update_now(@reagent, params[:order_id])
        redirect_to :controller => 'requests', :action =>   'show', :id => @request.id
      else
        redirect_to :controller => 'requests', :action =>   'edit', :id => @request.id
@@ -84,24 +109,24 @@ class ReagentsController < ApplicationController
     if order.on_back_order
       #if we're here then this is to update a back ordered reagent
       #check if delivery amount <= requested amount:
-      if order.back_order_amount == reagent.delivered_amount
+      if order.back_order_amount <= reagent.delivered_amount
         #if all the requested quantity has been delivered
         amount_left = re.amount_left + reagent.delivered_amount
         status = 'Delivered'
-      end
+     end
       if order.back_order_amount > reagent.delivered_amount
         amount_left = re.amount_left + reagent.delivered_amount
         status = 'OBO'
       end
 
     else
-      if order.ordered_amount == reagent.delivered_amount
+      if order.ordered_amount <= reagent.delivered_amount
         status = 'Delivered'
         bo_status = false
         bo_amount = 0
         amount_left = reagent.delivered_amount
       end
-      if order.ordered_amount < reagent.delivered_amount
+      if order.ordered_amount > reagent.delivered_amount
         status = 'OBO'
         bo_status = true
         bo_amount = order.ordered_amount - reagent.delivered_amount

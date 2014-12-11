@@ -1,0 +1,54 @@
+<h1>Reagent Requests</h1>
+
+<table align="center" id="requests">
+  <thead>
+   <tr>
+    <td><%= link_to 'Reagent Name', :controller => 'requests', :action => 'index', :order => 'reagent_name' %></td>
+    <td><%= link_to 'Requested By', :controller => 'requests', :action => 'index', :order => 'requested_by' %></td>
+    <td><%= link_to 'Requested For Study', :controller => 'requests', :action => 'index', :order => 'requested_for_study' %></td>
+    <td><%= link_to 'Requested Amount', :controller => 'requests', :action => 'index', :order => 'requested_amount' %></td>
+    <td>Request Date</td>
+    <td>Request Status</td>
+    <td>Last Date Updated</td>
+    <td>Edit / Place Order</td>
+   </tr>
+  </thead>
+  <tbody id="altColors">
+    <% @requests.each do |request| %>
+        <tr>
+          <td>
+            <% if request.status == 'Delivered' %>
+                <%= link_to "#{request.reagent_name}", :controller => 'reagents', :action => 'show', :id=> request.id %>
+            <% else %>
+                <%= request.reagent_name %>
+            <% end %>
+          </td>
+          <td><%=request.requested_by %></td>
+          <td><%=request.requested_for_study %></td>
+          <td><%=request.requested_amount %></td>
+          <td><%=request.requested_date %></td>
+          <td><%=request.status %></td>
+          <td><%=request.last_update_date %></td>
+          <td>
+            <p>
+              <% if request.status == 'Requested' and request.status != 'Ordered' and request.status!= 'OBO'%>
+                <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %> |
+              <% end %>
+              <% if request.status != 'Ordered' and request.status != 'Delivered' and request.status != 'OBO'%>
+                <%= link_to 'Order reagent', :controller => 'orders', :action => 'edit', :id => request.id %>
+              <% else %>
+                  <%= link_to 'View order', :controller => 'orders', :action => 'show', :id=> request.id %>
+              <% end %>
+            </p>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+
+
+</table>
+<br>
+<div class="navBox">
+    <%= link_to 'New Request', :controller => 'requests', :action => 'new'  %>  |
+    <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+</div>

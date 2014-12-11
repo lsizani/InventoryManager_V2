@@ -1,5 +1,5 @@
 <h1>Reagents in Storage</h1>
-<table align='center'>
+<table align='center' id='filter'>
   <thead>
     <tr>
       <td>Reagent Name</td>
@@ -14,33 +14,24 @@
     </tr>
   </thead>
   <tbody id="altColors">
-    <% @reagents.each do |reagent| %>
-        <% @orders.each do |order| %>
-           <% if order.id == reagent.order_id %>
-                <% @requests.each do |request| %>
-                    <% if request.id == order.request_id %>
-                      <tr>
-                        <td> <%=request.reagent_name%> </td>
-                        <td> <%=reagent.item_lot_no%> </td>
-                        <td> <%=reagent.item_cat_no%> </td>
-                        <td> <%=reagent.delivered_amount%> </td>
-                        <td> <%=reagent.amount_left%> </td>
-                        <% if request.is_reagent_kit %>
-                            <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => reagent.id %> </td>
-                        <% else %>
-                            <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => reagent.id %></td>
-                        <% end %>
-                        <td> <%=reagent.received_date%> </td>
-                        <td> <%=reagent.expiration_date%> </td>
-                        <td> <%=reagent.storage_location%> </td>
-                      </tr>
-                    <% end %>
-
-                <% end %>
-            <% end %>
+  <% @reagents.each do |rea| %>
+      <tr>
+        <td> <%= rea.request.reagent_name%> </td>
+        <td> <%=rea.reagent.item_lot_no%> </td>
+        <td> <%=rea.reagent.item_cat_no%> </td>
+        <td> <%=rea.reagent.delivered_amount%> </td>
+        <td> <%=rea.reagent.amount_left%> </td>
+        <% if rea.request.is_reagent_kit %>
+            <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => rea.reagent.id %> </td>
+        <% else %>
+            <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => rea.reagent.id %></td>
         <% end %>
-    <% end %>
+        <td> <%=rea.reagent.received_date%> </td>
+        <td> <%=rea.reagent.expiration_date%> </td>
+        <td> <%=rea.reagent.storage_location%> </td>
+      </tr>
 
+  <% end %>
   </tbody>
 </table>
 

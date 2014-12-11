@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   get 'reagents/index'
 
 InventoryManagerV2::Application.routes.draw do
-  #get 'reagents/index'
+  root 'welcome#index'
+
   namespace :admin do
     root 'admin#index'
   end
@@ -16,7 +17,8 @@ InventoryManagerV2::Application.routes.draw do
     end
 
     resources :dashboard
-    root 'welcome#index'
+    resources :reports
+
   end
 
 end

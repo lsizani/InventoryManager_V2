@@ -1,0 +1,62 @@
+<h1>Reagent Request Orders</h1>
+<div class="scroll">
+<table align="center" id=filter>
+  <thead>
+   <tr>
+    <td>Reagent Name</td>
+    <td>Requested By</td>
+    <td>Requested For Study</td>
+    <td>Requested amount</td>
+    <td>Ordered amount</td>
+    <td>Request Date</td>
+    <td>Order Date</td>
+    <td>Order Status</td>
+    <td>Order Number</td>
+    <td>Catalog Number</td>
+    <td>Manufacturer</td>
+    <td>Supplier</td>
+    <td>Edit / Place Order</td>
+   </tr>
+  </thead>
+  <tbody id="altColors">
+  <% @orders.each do |order| %>
+      <% @requests.each do |request| %>
+         <% if request.id == order.request_id %>
+          <tr>
+            <td><%=request.reagent_name %></td>
+            <td><%=request.requested_by %></td>
+            <td><%=request.requested_for_study %></td>
+            <td><%=request.requested_amount %></td>
+            <td><%=order.ordered_amount %></td>
+            <td><%=request.requested_date %></td>
+            <td><%=order.ordered_date %></td>
+            <td><%=order.status %></td>
+            <td><%=order.order_no %></td>
+            <td><%=order.catalog_no %></td>
+            <td><%=order.manufacturer %></td>
+            <td><%=order.supplier %></td>
+            <td>
+              <p>
+                <% if order.on_back_order %>
+                    <%= link_to 'Receive Order', :controller => 'reagents', :action => 'edit', :id => order.id %>
+                <% else %>
+                    <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :order_id => order.id %>
+                <% end %>
+              </p>
+            </td>
+          </tr>
+        <% end %>
+     <% end %>
+  <% end %>
+  </tbody>
+
+
+</table>
+  <br>
+</div>
+<br>
+<div class="navBox">
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

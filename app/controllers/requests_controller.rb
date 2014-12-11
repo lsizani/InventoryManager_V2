@@ -11,6 +11,7 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
+    @studies = Study.all
   end
 
   def create

@@ -1,0 +1,27 @@
+<h2>All Studies in Logs</h2>
+
+<table align="center" id="filter">
+  <thead>
+  <td>Study ID</td>
+  <td>Study Name</td>
+  <td>Study Number</td>
+  <td>Study Start Date</td>
+  <td>Study End Date</td>
+  </thead>
+  <tbody id="altColors">
+  <% @studies.each do |study| %>
+      <tr>
+        <td><%= study.id %></td>
+        <td><%= study.study_name %></td>
+        <td><%= study.study_number %></td>
+        <td><%= study.study_start_date %></td>
+        <td><%= study.study_end_date %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="navBox">
+  <%= link_to 'Add Study', :controller => 'studies', :action => 'new'  %>  |
+  <%= link_to 'Front Desk', :controller => 'dashboard', :action => 'index'  %>
+</div>
