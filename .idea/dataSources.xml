@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3305689400">
+  <component name="DataSourceManagerImpl" format="xml" hash="3268334262">
     <data-source source="LOCAL" name="Rails InventoryManager_V2: development" uuid="e8cca59f-6e65-4587-b5df-67bb91b30c08">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

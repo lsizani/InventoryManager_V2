@@ -4,6 +4,14 @@ class ReagentsController < ApplicationController
 
   end
 
+  def new
+    @id = params[:id]
+    @order = Order.find(@id)
+    @request = Request.find(@order.request_id)
+    @reagent = Reagent.new
+  end
+
+
   private
   def make_collection
     reagents = Reagent.all
@@ -47,12 +55,6 @@ class ReagentsController < ApplicationController
      else
        redirect_to :controller => 'requests', :action =>   'edit', :id => @request.id
      end
-  end
-
-  def new
-    @reagent = Reagent.new
-    @order = Order.find(params[:order_id])
-    @request = Request.find(@order.request_id)
   end
 
   def create

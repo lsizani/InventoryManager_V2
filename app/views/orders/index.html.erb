@@ -40,7 +40,7 @@
                 <% if order.on_back_order %>
                     <%= link_to 'Receive Order', :controller => 'reagents', :action => 'edit', :id => order.id %>
                 <% else %>
-                    <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :order_id => order.id %>
+                    <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :id => order.id %>
                 <% end %>
               </p>
             </td>

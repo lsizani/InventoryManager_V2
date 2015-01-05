@@ -1,9 +1,9 @@
 <h1>
-    <% if @request.is_reagent_kit %>
+  <% if @request.is_reagent_kit %>
       Delivery Log for <%= @request.reagent_name %> Kit
-    <% else %>
+  <% else %>
       Delivery Log for <%= @request.reagent_name %>
-    <% end %>
+  <% end %>
 </h1>
 
 <p>
@@ -34,9 +34,9 @@
           </ul>
         </div>
     <% end %>
-   <p>
-     <%= r.label :received_Date %>
-     <%= r.date_select :received_date %>
+    <p>
+      <%= r.label :received_Date %>
+      <%= r.date_select :received_date %>
 
       <%= r.label :expiration_Date %>
       <%= r.date_select :expiration_date %>
@@ -63,6 +63,6 @@
       <%= r.text_field :delivered_amount %>    |
       <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
     </p>
-         <%= hidden_field_tag 'order_id', @order.id %>
-         <%= r.submit %>
+    <%= hidden_field_tag 'order_id', @order.id %>
+    <%= r.submit %>
 <% end %>
