@@ -11,31 +11,24 @@ class ReagentsController < ApplicationController
     @reagent = Reagent.new
   end
 
+  def create
+    @order = Order.find(params[:order_id])
+    @request = Request.find(@order.request_id)
 
-  private
-  def make_collection
-    reagents = Reagent.all
-    orders = Order.select('id, request_id').where(status:['Delivered', 'OBO'])
-    requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered', 'OBO'])
-    collection = Array.new
+    @reagent = Reagent.new(create_params)
+    if @reagent.save
 
-    i = 0
-    reagents.each { |r|
-      orders.each{  |o|
-        if r.order_id == o.id
-          requests.each { |re|
-            if re.id == o.request_id
-              temp = ReagentObject.new
-              temp.set_vars(r,o,re)
-              collection[i] = temp
-              i = i + 1
-            end
-          }
-        end
+      update_now(@reagent, params[:order_id])
+      if@request.is_reagent_kit
 
-      }
-    }
-    collection
+        redirect_to :controller => 'kit_items' , :action => 'new', :reagent_id=> @reagent.id
+      else
+        redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id
+      end
+    else
+      render :controller => 'reagents', :action => 'new', :order_id => params[:order_id]
+    end
+
   end
 
   def edit
@@ -55,26 +48,6 @@ class ReagentsController < ApplicationController
      else
        redirect_to :controller => 'requests', :action =>   'edit', :id => @request.id
      end
-  end
-
-  def create
-    @order = Order.find(params[:order_id])
-    @request = Request.find(@order.request_id)
-
-    @reagent = Reagent.new(create_params)
-    if @reagent.save
-
-      update_now(@reagent, params[:order_id])
-      if@request.is_reagent_kit
-
-        redirect_to :controller => 'kit_items' , :action => 'new', :reagent_id=> @reagent.id
-      else
-        redirect_to :controller => 'reagents' , :action => 'show', :id=> @reagent.id
-      end
-    else
-      render :controller => 'reagents', :action => 'new', :order_id => params[:order_id]
-    end
-
   end
 
   def show
@@ -140,6 +113,32 @@ class ReagentsController < ApplicationController
     order.update(on_back_order: bo_status, back_order_delivery_date: Date.today, back_order_amount: bo_amount, status: status)
     request.update(status:status)
 
+  end
+
+  private
+  def make_collection
+    reagents = Reagent.all
+    orders = Order.select('id, request_id').where(status:['Delivered', 'OBO'])
+    requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered', 'OBO'])
+    collection = Array.new
+
+    i = 0
+    reagents.each { |r|
+      orders.each{  |o|
+        if r.order_id == o.id
+          requests.each { |re|
+            if re.id == o.request_id
+              temp = ReagentObject.new
+              temp.set_vars(r,o,re)
+              collection[i] = temp
+              i = i + 1
+            end
+          }
+        end
+
+      }
+    }
+    collection
   end
 
   private
