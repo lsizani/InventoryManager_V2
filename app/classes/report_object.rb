@@ -4,6 +4,11 @@ class ReportObject
     @id = study_id
   end
 
+  def assign(study_id, tables)
+    @id = study_id
+    @show_tables = tables
+  end
+
   def study
     @study = Study.find(@id)
   end
@@ -23,6 +28,10 @@ class ReportObject
     @sum = 0
     prices.each { |c| @sum += c }
     @sum
+  end
+
+  def show_tables
+    @show_tables
   end
 
 end

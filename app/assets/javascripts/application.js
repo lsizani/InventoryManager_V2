@@ -35,20 +35,28 @@ function altRows(id){
 
 
 window.onload = function(){
-    altRows("altColors");
-    setFilterGrid("filter");
-
+    if(document.getElementById("filter") != null ) {
+        altRows("altColors");
+        setFilterGrid("filter");
+    }
 
     //The following functions are called for the reports screen
-    altRows("altColors1");
-    setFilterGrid("filter1");
+    if(document.getElementById("filter1") != null ) {
+        altRows("altColors1");
+        setFilterGrid("filter1");
+    }
 
-    altRows("altColors2");
-    setFilterGrid("filter2");
+    if(document.getElementById("filter2") != null ) {
+        altRows("altColors2");
+        setFilterGrid("filter2");
+    }
+    if(document.getElementById("filter3") != null ) {
+        altRows("altColors3");
+        setFilterGrid("filter3");
+    }
 
-    altRows("altColors3");
-    setFilterGrid("filter3");
-
-    altRows("altColors4");
-    setFilterGrid("filter4");
+    if(document.getElementById("filter4") != null ) {
+        altRows("altColors4");
+        setFilterGrid("filter4");
+    }
 }

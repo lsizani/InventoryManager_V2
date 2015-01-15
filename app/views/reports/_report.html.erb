@@ -59,6 +59,7 @@
         <tr ><td colspan="7" align="right"> Total Cost of Orders: R <%= @object.order_cost %> </td></tr>
       </tfoot>
     </table>
+    <%= link_to 'Export',  :controller => 'reports' , :action => 'show' , :id => @id%>
 <% else %>
     <p> No order data for study</p>
 <% end %>

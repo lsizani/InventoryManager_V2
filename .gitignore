@@ -15,3 +15,9 @@
 /log/*.log
 /tmp
 /nbproject/private/
+
+#Ignore database config file and server config file
+/config/*.yml
+
+#Ignore Gemfile.lock
+Gemfile.lock

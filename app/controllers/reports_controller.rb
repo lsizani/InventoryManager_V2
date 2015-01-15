@@ -1,32 +1,22 @@
 class ReportsController < ApplicationController
+  caches_page :show
+
   def index
-    args = params[:goto]
-
-    case args
-      when 'manifest'
-        if params[:manifest] != nil
-          @report = 'report'
-          id = params[:manifest][:id] != nil ? params[:manifest][:id] : 0
-          @object = ReportObject.new
-
-          @object.assign(id)
-          #@sum = @object.order_cost(@object.orders)
-        else
-          @report = 'placeholder'
-        end
-        @template = 'manifest'
-      when 'options'
-        @template = 'options'
-      else
-        @template = 'options'
-    end
-
-
 
   end
 
   def show
+    id = params[:id]
+    tables = params[:selection].to_a
 
+    @object = ReportObject.new
+    @object.assign(id, tables)
+
+  end
+
+  def create
+    redirect_to :controller => 'reports',
+                :action => 'show', :id => params[:manifest][:id], :selection => params[:table][:selection]
   end
 
   def study_cost
