@@ -3,8 +3,8 @@
 <table align="center" id="filter">
   <thead>
   <td>Study ID</td>
-  <td>Study Name</td>
   <td>Study Number</td>
+  <td>Study Description</td>
   <td>Study Start Date</td>
   <td>Study End Date</td>
   </thead>
@@ -12,8 +12,8 @@
   <% @studies.each do |study| %>
       <tr>
         <td><%= study.id %></td>
-        <td><%= study.study_name %></td>
         <td><%= study.study_number %></td>
+        <td><%= study.study_name %></td>
         <td><%= study.study_start_date %></td>
         <td><%= study.study_end_date %></td>
       </tr>

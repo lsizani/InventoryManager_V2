@@ -20,7 +20,10 @@
         <td><%= l.text_field :expiration_date, value: @reagent.expiration_date , :readonly=> true%></td>
         <td><%= l.date_select :opened_date%></td>
         <td><%= l.text_field  :opened_by, value: 'current user'%></td>
-        <td><%= l.text_field  :for_study%></td>
+        <td>
+            <%= l.collection_select(:requested_for_study, @studies, :study_number, :study_number,
+                                    :include_blank => 'Please select', :class=> 'required') %>
+        </td>
         <%= hidden_field_tag 'reagent_id', @reagent.id %>
 
         <td><%= l.submit %></td>

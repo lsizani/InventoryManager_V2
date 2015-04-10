@@ -3,8 +3,8 @@
 <table align="center">
   <thead>
   <td>Study ID</td>
-  <td>Study Name</td>
   <td>Study Number</td>
+  <td>Study Description</td>
   <td>Study Start Date</td>
   <td>Study End Date</td>
   <td></td>
@@ -12,8 +12,8 @@
   <tbody>
     <%= form_for :study, url: {:action=>"create", :controller=>"studies"} do |std| %>
       <td></td>
-      <td><%= std.text_field :study_name %></td>
       <td><%= std.text_field :study_number %></td>
+      <td><%= std.text_field :study_name %></td>
       <td><%= std.date_select :study_start_date %></td>
       <td><%= std.date_select :study_end_date %></td>
       <td><%= std.submit %></td>
