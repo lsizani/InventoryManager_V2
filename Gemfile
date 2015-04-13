@@ -16,4 +16,4 @@ gem 'rqrcode'
 gem 'formtastic', '~> 3.0'
 gem 'actionpack-page_caching'
 gem "rspec-rails", :group => [:development, :test]
-
+gem 'factory_girl_rails'

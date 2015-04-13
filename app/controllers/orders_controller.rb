@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find_by_request_id(params[:id])
     @request = Request.find(@order.request_id)
   end
 

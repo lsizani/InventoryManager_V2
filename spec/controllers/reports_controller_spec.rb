@@ -1,4 +1,4 @@
-require '../../spec/rails_helper'
+require 'spec_helper'
 
 RSpec.describe ReportsController, :type => :controller do
 
