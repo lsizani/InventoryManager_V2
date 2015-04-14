@@ -18,7 +18,7 @@
 
     <p>
       <%= r.label :requested_By %>
-      <%= r.text_field :requested_by, :class => 'required' %>
+      <%= r.text_field :requested_by, :value=> current_user.first_name.concat(' '.concat(current_user.last_name)), :readonly => true, :class => 'required' %>
       |
       <%= r.label :requested_Date %>
       <%= r.date_select :requested_date  %>
@@ -40,7 +40,7 @@
 
     <p>
       <%= r.label :requested_For_Study %>
-      <%= r.collection_select(:requested_for_study, @studies, :study_number, :study_number, :include_blank => 'Please select', :class=> 'required') %>
+      <%= r.collection_select(:requested_for_study, Study.all, :study_number, :study_number, :include_blank => 'Please select', :class=> 'required') %>
     </p>
 
     <p>

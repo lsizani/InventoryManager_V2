@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141203163011) do
+ActiveRecord::Schema.define(version: 20150414135232) do
 
   create_table "kit_items", force: true do |t|
     t.integer  "reagent_id"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20141203163011) do
     t.date     "opened_date"
     t.string   "opened_by"
     t.string   "for_study"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "online_users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

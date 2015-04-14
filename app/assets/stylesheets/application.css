@@ -15,12 +15,25 @@
  *= require filtergrid
  */
 
+.danger{
+    background-color: #FF3333;
+    color: black;
+    border-radius: 3px;
+
+}
+
 
 div.report{
     border: 1px solid black;
     padding: 5px;
 
 
+}
+
+.error_explanation{
+    color: red;
+    font-size: 12px;
+    font-family: arial, sans-serif;
 }
 .scroll{
     overflow: scroll;
@@ -45,6 +58,12 @@ div.report{
     position: fixed;
     bottom: 10px;
     vertical-align: bottom;
+}
+
+.top_right{
+    position: fixed;
+    top: 5%;
+    right: 5%;
 }
 
 .navBox{
@@ -144,6 +163,5 @@ form{
     font-weight: bold;
     font-size: 20px;
     border: 1px solid #000000;
-    width: 950px;
     padding: 20px;
 }

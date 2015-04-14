@@ -24,12 +24,23 @@
         </tr>
     <% end %>
    <% end %>
-  <%= form_for :kit_item, url: kit_items_path do |it| %>
+  <%= form_for :kit_item, url: { :controller=> 'kit_items', :action => 'create', } do |it| %>
+      <% if @kit_item.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@kit_item.errors.count, 'error') %> prohibited
+              this request from being saved:</h2>
+            <ul>
+              <% @kit_item.errors.full_messages.each do |msg| %>
+                  <li><p><%= msg %></p></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
         <tr>
           <td><%= it.text_field :item_name  %></td>
           <td><%= it.text_field :item_lot_no  %></td>
           <td><%= it.text_field :item_cat_no  %></td>
-          <td><%= it.date_select :item_expiration_date  %></td>
+          <td><%= it.date_select :item_expiration_date, default: @reagent.expiration_date  %></td>
           <td><%= it.text_field :item_storage_temp  %> &deg;<strong>C</strong></td>
           <td><%= it.text_field :item_storage_location %></td>
           <%= hidden_field_tag 'reagent_id', @reagent.id %>

@@ -1,31 +1,17 @@
 require 'spec_helper'
 
-RSpec.describe RequestsController, :type => :controller do
+RSpec.describe RequestsController, type: :controller do
 
-
-  describe 'GET index' do
-    it 'assigns @requests' do
+  context 'When viewing all requests' do
+    it 'has status 200' do
       get :index
-      expect(assigns(:requests))
+      expect(response.status).to eq(200)
     end
 
-    it 'gets index template' do
+    it 'assigns @requests object' do
       get :index
-      expect(response).to render_template('index')
+      expect(response).to assigns(:requests)
     end
   end
-
-  describe 'Get new' do
-    it 'assigns @studies' do
-      get :new
-      expect(assigns(:studies))
-    end
-
-    it 'creates a request object' do
-      get :new
-      expect(:request).to a_kind_of Request
-    end
-  end
-
 
 end

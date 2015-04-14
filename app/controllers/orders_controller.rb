@@ -1,19 +1,34 @@
 class OrdersController < ApplicationController
 
   def index
-     @orders = Order.all
-     @requests = Request.where(status:['Ordered','OBO'])
+    if current_user != nil
+      @orders = Order.all
+      @requests = Request.where(status:['Ordered','OBO'])
+    else
+      redirect_to root_path
+    end
+
   end
 
   def new
+    if current_user != nil
      @request = Request.find_by(id: params[:id])
      @order = Order.new
+    else
+      redirect_to root_path
+    end
 
   end
 
   def edit
-    @request = Request.find_by(id: params[:id])
-    redirect_to :controller => 'orders', :action => 'new', :id => @request.id
+
+    if current_user != nil
+      @request = Request.find_by(id: params[:id])
+      redirect_to :controller => 'orders', :action => 'new', :id => @request.id
+    else
+      redirect_to root_path
+    end
+
   end
 
 
@@ -30,8 +45,17 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by_request_id(params[:id])
-    @request = Request.find(@order.request_id)
+    if current_user != nil
+      begin
+        @order = Order.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+         @order = Order.find_by_request_id(params[:id])
+      end
+      @request = Request.find(@order.request_id)
+    else
+      redirect_to root_path
+    end
+
   end
 
   private

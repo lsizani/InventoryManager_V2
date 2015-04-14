@@ -1,11 +1,21 @@
 class StudiesController < ApplicationController
 
   def index
-    @studies = Study.all
+    if current_user != nil
+      @studies = Study.all
+    else
+      redirect_to root_path
+    end
+
   end
 
   def new
+    if current_user != nil
       @study = Study.new
+    else
+      redirect_to root_path
+    end
+
   end
 
   def create
@@ -16,7 +26,12 @@ class StudiesController < ApplicationController
   end
 
 	def show
-		@study = Study.find(params[:id])
+    if current_user != nil
+      @study = Study.find(params[:id])
+    else
+      redirect_to root_path
+    end
+
 	end
 
   private

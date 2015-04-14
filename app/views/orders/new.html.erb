@@ -12,14 +12,17 @@
 <%= form_for :order, url: orders_path do |o| %>
 
     <% if @order.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@order.errors.count, 'error') %> prohibited
-            this request from being saved:</h2>
+        <div id='error_explanation' class = 'error_explanation'>
+
+          <h3>
+            <%= pluralize(@order.errors.count, 'error') %> prohibited this request from being saved:
+          </h3>
           <ul>
             <% @order.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
+                <li><p><%= msg %></p></li>
             <% end %>
           </ul>
+
         </div>
     <% end %>
 

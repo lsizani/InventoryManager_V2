@@ -1,3 +1,4 @@
+<%= render :partial => '/current_user'  %>
 <h1>Reagent Log: <%= @reagent.item_lot_no  %></h1>
 <% if @log.nil? or @log.count < 1 %>
     <h1>No Log Entries</h1>

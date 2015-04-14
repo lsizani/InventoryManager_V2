@@ -1,17 +1,25 @@
 class RequestsController < ApplicationController
 
   def index
-     @requests = Request.all
-     if params[:order].blank?
-       @requests = @requests.all
-     else
-       @requests = @requests.order(params[:order])
-     end
+    if current_user != nil
+       @requests = Request.all
+       if params[:order].blank?
+         @requests = @requests.all
+       else
+         @requests = @requests.order(params[:order])
+       end
+    else
+      redirect_to root_path
+    end
   end
 
   def new
-    @request = Request.new
-    @studies = Study.all
+    if current_user != nil
+      @request = Request.new
+    else
+      redirect_to root_path
+    end
+
   end
 
   def create
@@ -32,12 +40,16 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @request = Request.find(params[:id])
+    if current_user != nil
+      @request = Request.find(params[:id])
+    else
+      redirect_to root_path
+    end
+
   end
 
   def update
     @request = Request.find(params[:id])
-
 
     if @request.update(request_args)
         update_now(@request)
@@ -48,7 +60,11 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    @request = Request.find(params[:id])
+    if current_user != nil
+      @request = Request.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
 

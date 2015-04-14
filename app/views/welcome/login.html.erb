@@ -1,0 +1,14 @@
+<%= image_tag 'logo_mid.png', size: '400x200',:align => 'top'  %>
+<h1 class="home">Inventory Management</h1>
+<center>
+    <%= form_for :ad_user, url:  login_path  do |s|   %>
+      <% if flash[:danger] %>
+          <span class='danger'><%= flash[:danger] %></span>
+      <% end %>
+      <br>
+        <%= s.text_field :user_name , :placeholder => 'User Name'%> <br><br>
+        <%= s.password_field :password , :placeholder => 'Password' %> <br>
+        <%= s.submit 'Log in' %>
+
+    <% end %>
+</center>

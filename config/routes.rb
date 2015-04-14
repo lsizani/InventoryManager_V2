@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   get 'reagents/index'
 
 InventoryManagerV2::Application.routes.draw do
-  root 'welcome#index'
+  root 'welcome#login'
+
+  get    'home'     => 'welcome#index'
+  get    'login'    => 'sessions#new'
+  post   'login'    => 'sessions#create'
+  get    'logout'   => 'sessions#destroy'
 
   namespace :admin do
     root 'admin#index'

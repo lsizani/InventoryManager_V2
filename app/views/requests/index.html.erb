@@ -1,3 +1,4 @@
+<%= render :partial => '/current_user'  %>
 <h1>Reagent Requests</h1>
 
 <table align="center" id="filter">
@@ -44,5 +45,5 @@
 <br>
 <div class="navBox">
     <%= link_to 'New Request', :controller => 'requests', :action => 'new'  %>  |
-    <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+    <%= link_to 'Home', home_url  %>
 </div>

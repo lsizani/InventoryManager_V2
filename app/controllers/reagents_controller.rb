@@ -1,14 +1,23 @@
 class ReagentsController < ApplicationController
   def index
-    @reagents = make_collection
+    if current_user != nil
+      @reagents = make_collection
+    else
+      redirect_to root_path
+    end
 
   end
 
   def new
-    @id = params[:id]
-    @order = Order.find(@id)
-    @request = Request.find(@order.request_id)
-    @reagent = Reagent.new
+    if current_user != nil
+      @id = params[:id]
+      @order = Order.find(@id)
+      @request = Request.find(@order.request_id)
+      @reagent = Reagent.new
+    else
+      redirect_to root_path
+    end
+
   end
 
   def create
@@ -32,9 +41,14 @@ class ReagentsController < ApplicationController
   end
 
   def edit
-    @order = Order.find(params[:id])
-    @reagent = Reagent.find_by(order_id:@order.id)
-    @request = Request.find(@order.request_id)
+    if current_user != nil
+      @order = Order.find(params[:id])
+      @reagent = Reagent.find_by(order_id:@order.id)
+      @request = Request.find(@order.request_id)
+    else
+      redirect_to root_path
+    end
+
   end
 
   def update
@@ -51,12 +65,17 @@ class ReagentsController < ApplicationController
   end
 
   def show
+    if current_user != nil
       @reagent = Reagent.find(params[:id])
       @order = Order.find_by(id: @reagent.order_id)
       @request = Request.find_by(id: @order.request_id)
 
       code = make_code(@order, @request)
       @qr = RQRCode::QRCode.new( code, :size => 4, :level => :h )
+    else
+      redirect_to root_path
+    end
+
   end
 
   def show_reagent
@@ -109,7 +128,7 @@ class ReagentsController < ApplicationController
       end
     end
 
-    re.update(order_id: order_id, amount_left: amount_left, last_date_updated: Date.today)
+    re.update(order_id: order_id, amount_left: amount_left, status: status, last_date_updated: Date.today)
     order.update(on_back_order: bo_status, back_order_delivery_date: Date.today, back_order_amount: bo_amount, status: status)
     request.update(status:status)
 
@@ -117,7 +136,7 @@ class ReagentsController < ApplicationController
 
   private
   def make_collection
-    reagents = Reagent.all
+    reagents = Reagent.where(status: ['Delivered', 'OBO'])
     orders = Order.select('id, request_id').where(status:['Delivered', 'OBO'])
     requests = Request.select('id, reagent_name, is_reagent_kit').where(status:['Delivered', 'OBO'])
     collection = Array.new

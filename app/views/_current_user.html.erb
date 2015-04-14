@@ -1,0 +1,4 @@
+<div class='top_right'>
+  <p>Logged in: <%= current_user.first_name %> &nbsp;<%= current_user.last_name %> &nbsp;
+    <%= link_to 'logout', :controller => 'sessions', :action => 'destroy' %></p>
+</div>
