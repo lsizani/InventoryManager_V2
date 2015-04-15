@@ -19,7 +19,6 @@ module SessionsHelper
 
     if OnlineUser.count < 1
       #TODO: reset id
-      ActiveRecord::Base.connection.reset_pk_sequence!('online_users')
     end
 
   end
