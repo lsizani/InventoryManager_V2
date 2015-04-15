@@ -1,0 +1,35 @@
+<h1>Add/Remove System Variables</h1>
+
+<table align="center" id="filter">
+<thead>
+<tr>
+  <td>Setting</td>
+  <td>Value</td>
+</tr>
+</thead>
+<tbody id="altColors">
+<%= form_for :setting, url: { :controller=> 'dashboard', :action => 'create', } do |it| %>
+<% @settings.each  do |k, v| %>
+    <tr>
+        <td>
+          <%= it.text_field :key, :value => k.inspect %> <br>
+        </td>
+
+        <td><% v.each  do |vk, vv| %> <br>
+                <p><%= it.text_field :val, :value =>  vv.inspect %> <%= link_to 'remove' %></p>
+            <% end %>
+         </td>
+    </tr>
+<% end %>
+
+        <tr>
+          <td>
+            <%= it.text_field :key %>
+          </td>
+          <td>
+            <%= it.text_field :val %>
+            <%= it.submit %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
