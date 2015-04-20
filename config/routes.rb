@@ -4,12 +4,12 @@ Rails.application.routes.draw do
 InventoryManagerV2::Application.routes.draw do
   root 'welcome#login'
 
-  get    'home'     => 'welcome#index'
-  get    'login'    => 'sessions#new'
-  post   'login'    => 'sessions#create'
-  get    'logout'   => 'sessions#destroy'
-  get    'settings' => 'dashboard#settings'
-
+  get    'home'             => 'welcome#index'
+  get    'login'            => 'sessions#new'
+  post   'login'            => 'sessions#create'
+  get    'logout'           => 'sessions#destroy'
+  get    'settings'         => 'dashboard#settings'
+  get    'download_report'  => 'reagents#dump_to_csv'
   namespace :admin do
     root 'admin#index'
   end

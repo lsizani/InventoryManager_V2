@@ -35,6 +35,13 @@ class OrdersController < ApplicationController
     @order = Order.new(create_params)
     if @order.save
       @order.update_now(@order.request_id)
+
+      begin
+        NoticeMailer.notify_new_request(@request).deliver
+      rescue Exception => e
+        logger.error("Message for the log file #{e.message}")
+      end
+
       redirect_to :controller => 'orders', :action => 'show', :id => @order.id
     else
       render :controller => 'orders', :action => 'new', :id => @order.request.id

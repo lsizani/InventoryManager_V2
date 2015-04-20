@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
 
   def create
     redirect_to :controller => 'reports',
-                :action => 'show', :id => params[:manifest][:id], :selection => params[:table][:selection]
+                :action => 'show', :id => params[:study][:id], :selection => params[:table][:selection]
   end
 
   def study_cost

@@ -8,6 +8,13 @@ class ReagentsController < ApplicationController
 
   end
 
+  def dump_to_csv
+    @reagents = Reagent.all
+    respond_to do |format|
+      format.csv { send_data @reagents.to_csv }
+    end
+  end
+
   def new
     if current_user != nil
       @id = params[:id]

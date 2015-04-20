@@ -1,18 +1,12 @@
 <%= render :partial => '/current_user'  %>
 <h2>Reports Page</h2>
 
-<%= form_for :manifest, url: {:controller => 'reports', :action => 'create'}, method: :post do |f|  %>
+<%= form_for :study, url: {:controller => 'reports', :action => 'create'}, method: :post do |f|  %>
     <p>Select your study from the list: </p>
     <%= f.collection_select(:id, Study.all, :id, :study_number, {:prompt => 'All'}) %>
-    <%= hidden_field_tag 'goto', 'manifest' %>
-    <p>Select The table(s) to show: </p>
-    <p><%= check_box('table', 'selection', {:multiple => true, :onchange=> ''}, 'Requests', nil) %>Request</p>
-        <div id='request_filter' style='display:none;'>
-          <%= check_box('request', 'selection', {:multiple => true}, 'requested_by', nil) %>Requested By
-          <%= check_box('request', 'selection', {:multiple => true}, 'request_status', nil) %>Request Status
-        </div>
-    <p><%= check_box('table', 'selection', {:multiple => true}, 'Orders', nil) %>Orders</p>
-    <p><%= check_box('table', 'selection', {:multiple => true}, 'Reagents', nil) %>Reagents</p>
+    <p><%= check_box('table', 'selection', {:multiple => true}, 'Reagents', nil) %>Reagents|
+      <%= date_select 'reagents', 'reagents ' %> Received Date
+    </p>
     <%= f.submit('Export Data') %>
 
 <% end %>
