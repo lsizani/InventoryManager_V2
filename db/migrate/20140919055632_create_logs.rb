@@ -9,6 +9,10 @@ class CreateLogs < ActiveRecord::Migration
       t.date      :opened_date
       t.string    :opened_by
       t.string    :for_study
+
+      #Audit data
+      t.string      :last_changed_by
+      t.string      :date_last_changed
       t.timestamps
     end
   end

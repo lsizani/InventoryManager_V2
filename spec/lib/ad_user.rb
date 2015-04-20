@@ -1,8 +1,9 @@
 class ADUser
-  def initialize(first_name, last_name, email)
+  def initialize(first_name, last_name, email, groups)
     @first_name = first_name
     @last_name = last_name
     @email = email
+    @groups = groups
   end
 
   def first_name
@@ -15,5 +16,9 @@ class ADUser
 
   def email
     @email
+  end
+
+  def user_groups
+    @groups
   end
 end

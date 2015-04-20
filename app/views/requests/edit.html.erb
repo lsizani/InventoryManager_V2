@@ -1,4 +1,4 @@
-<h1>Edit Data For Request <%= params[:id] %></h1>
+<h1>Edit request for: <%= @request.reagent_name %> </h1>
 
 
 <%= form_for :request, :url => { :action => 'update' }, :html => { :method => 'put' } do |r| %>
@@ -18,10 +18,20 @@
       <%= r.text_field :requested_amount %>
 
     </p>
-        <%= r.label :requested_For_Study %>
-        <%= r.text_field :requested_for_study %>
     <p>
+      <%= r.label :requested_For_Study %>
+      <%= r.collection_select(:requested_for_study, Study.all, :study_number, :study_number, :include_blank => 'Please select', :class=> 'required') %>
+    </p>
 
+    <p>
+      <%= r.label :catalog_No %>
+      <%= r.text_field :catalog_no %>  |
+
+      <%= r.label :manufacturer %>
+      <%= r.text_field :manufacturer %> <br>
+
+      <%= r.label :supplier %>
+      <%= r.text_field :supplier %> |
     </p>
     <%= r.submit %>
 <% end %>

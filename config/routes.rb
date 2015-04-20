@@ -22,7 +22,7 @@ InventoryManagerV2::Application.routes.draw do
       resources :logs
     end
 
-    resources :dashboard
+    resources :dashboard, :only => [:index]
     resources :reports
 
   end

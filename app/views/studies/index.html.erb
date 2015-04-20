@@ -3,11 +3,14 @@
 
 <table align="center" id="filter">
   <thead>
+  <tr>
   <td>Study ID</td>
   <td>Study Number</td>
   <td>Study Description</td>
   <td>Study Start Date</td>
   <td>Study End Date</td>
+  <td></td>
+  </tr>
   </thead>
   <tbody id="altColors">
   <% @studies.each do |study| %>
@@ -17,6 +20,7 @@
         <td><%= study.study_name %></td>
         <td><%= study.study_start_date %></td>
         <td><%= study.study_end_date %></td>
+        <td><%= link_to 'edit', :controller=> 'studies', :action=> 'edit', :id => study.id %></td>
       </tr>
   <% end %>
   </tbody>

@@ -17,19 +17,19 @@
   <tbody id="altColors">
   <% @reagents.each do |rea| %>
       <tr>
-        <td> <%= rea.request.reagent_name%> </td>
-        <td> <%=rea.reagent.item_lot_no%> </td>
-        <td> <%=rea.reagent.item_cat_no%> </td>
-        <td> <%=rea.reagent.delivered_amount%> </td>
-        <td> <%=rea.reagent.amount_left%> </td>
-        <% if rea.request.is_reagent_kit %>
-            <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => rea.reagent.id %> </td>
+        <td> <%= rea.order.request_reagent_name%> </td>
+        <td> <%=rea.item_lot_no%> </td>
+        <td> <%=rea.item_cat_no%> </td>
+        <td> <%=rea.delivered_amount%> </td>
+        <td> <%=rea.amount_left%> </td>
+        <% if rea.order.request_is_reagent_kit %>
+            <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => rea.id %> </td>
         <% else %>
-            <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => rea.reagent.id %></td>
+            <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => rea.id %></td>
         <% end %>
-        <td> <%=rea.reagent.received_date%> </td>
-        <td> <%=rea.reagent.expiration_date%> </td>
-        <td> <%=rea.reagent.storage_location%> </td>
+        <td> <%=rea.received_date%> </td>
+        <td> <%=rea.expiration_date%> </td>
+        <td> <%=rea.storage_location%> </td>
       </tr>
 
   <% end %>

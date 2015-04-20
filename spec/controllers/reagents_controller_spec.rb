@@ -6,7 +6,7 @@ RSpec.describe ReagentsController, type: :controller do
   context 'When opening reagents home' do
 
     before :each do
-      @lunga = ADUser.new('Test','User','TUser@synexagroup.com')
+      @lunga = ADUser.new('Test','User','TUser@synexagroup.com', ['All Users','Synexa Cape Town', 'IT Support'])
       log_in(@lunga)
     end
 

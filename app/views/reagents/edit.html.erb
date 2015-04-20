@@ -26,8 +26,8 @@
 
     <p>
       <%= r.label :delivered_Amount %>
-      <%= r.text_field :delivered_amount, :value => "#{@request.requested_amount - @order.back_order_amount}" %>    |
-      <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units | Amount on Back Order: <%= @order.back_order_amount %>
+      <%= r.text_field :delivered_amount, :value => "#{@order.request.requested_amount - @order.back_order_amount}" %>    |
+      <strong>Requested_Amount: </strong><%= @order.request.requested_amount %> Units | Amount on Back Order: <%= @order.back_order_amount %>
     </p>
     <%= hidden_field_tag 'order_id', @order.id %>
     <%= r.submit %>

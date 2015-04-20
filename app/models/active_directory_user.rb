@@ -99,6 +99,10 @@ class ActiveDirectoryUser
     self.groups.include?(group)
   end
 
+  def user_groups
+    self.groups
+  end
+
   private
 
   def initialize(entry)

@@ -43,7 +43,8 @@ class LogsController < ApplicationController
   private
   def update_now(record, reagent_id, kit_item_id)
     log = Log.find(record.id)
-    log.update(reagent_id:reagent_id)
+    log.update(date_last_changed:Date.today,
+               last_changed_by: current_user_full_name,reagent_id:reagent_id)
 
     re = Reagent.find(reagent_id)
     amount = re.amount_left - log.number

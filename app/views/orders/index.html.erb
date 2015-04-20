@@ -1,5 +1,5 @@
 <%= render :partial => '/current_user'  %>
-<h1>Reagent Request Orders</h1>
+<h1>All orders</h1>
 <div class="scroll">
 <table align="center" id='filter'>
   <thead>
@@ -21,15 +21,13 @@
   </thead>
   <tbody id="altColors">
   <% @orders.each do |order| %>
-      <% @requests.each do |request| %>
-         <% if request.id == order.request_id %>
           <tr>
-            <td><%=request.reagent_name %></td>
-            <td><%=request.requested_by %></td>
-            <td><%=request.requested_for_study %></td>
-            <td><%=request.requested_amount %></td>
+            <td><%=order.request_reagent_name %></td>
+            <td><%=order.request_requested_by %></td>
+            <td><%=order.request_requested_for_study %></td>
+            <td><%=order.request_requested_amount %></td>
             <td><%=order.ordered_amount %></td>
-            <td><%=request.requested_date %></td>
+            <td><%=order.request_requested_date %></td>
             <td><%=order.ordered_date %></td>
             <td><%=order.status %></td>
             <td><%=order.order_no %></td>
@@ -47,8 +45,6 @@
             </td>
           </tr>
         <% end %>
-     <% end %>
-  <% end %>
   </tbody>
 
 

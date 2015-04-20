@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414135232) do
+ActiveRecord::Schema.define(version: 20150414135234) do
 
   create_table "kit_items", force: true do |t|
     t.integer  "reagent_id"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.boolean  "is_item_used",                                   default: false
     t.date     "date_opened"
     t.string   "used_by"
+    t.string   "last_changed_by"
+    t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,6 +40,8 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.date     "opened_date"
     t.string   "opened_by"
     t.string   "for_study"
+    t.string   "last_changed_by"
+    t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.text     "groups"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,6 +69,8 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.date     "ordered_date"
     t.date     "last_date_updated"
     t.string   "status"
+    t.string   "last_changed_by"
+    t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -80,6 +87,8 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.date     "expiration_date"
     t.string   "status"
     t.date     "last_date_updated"
+    t.string   "last_changed_by"
+    t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,6 +106,8 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.string   "supplier"
     t.boolean  "is_reagent_kit"
     t.integer  "child_items_no"
+    t.string   "last_changed_by"
+    t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,6 +117,8 @@ ActiveRecord::Schema.define(version: 20150414135232) do
     t.string   "study_number"
     t.date     "study_start_date"
     t.date     "study_end_date"
+    t.string   "last_changed_by"
+    t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

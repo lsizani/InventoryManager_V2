@@ -78,6 +78,7 @@ class RequestsController < ApplicationController
   private
   def update_now(record)
     re = Request.find_by(id: record.id)
-    re.update(last_update_date:Date.today, status:'Requested')
+    re.update(last_update_date:Date.today,date_last_changed:Date.today,
+              last_changed_by: current_user_full_name, status:'Requested')
   end
 end

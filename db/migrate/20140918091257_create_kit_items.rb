@@ -14,6 +14,10 @@ class CreateKitItems < ActiveRecord::Migration
       t.boolean  :is_item_used, :default => false   #must default to false
       t.date     :date_opened
       t.string   :used_by
+
+      #Audit data
+      t.string      :last_changed_by
+      t.string      :date_last_changed
       t.timestamps
     end
   end

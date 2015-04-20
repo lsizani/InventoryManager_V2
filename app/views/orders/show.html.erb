@@ -1,7 +1,7 @@
-<h1><%= @request.reagent_name %> Order Summary </h1>
+<h1><%= @order.request_reagent_name %> Order Summary </h1>
 
 <p>
-  Order Number: <%= @order.order_no %>
+  Order Number: <%= @order.order_no %> | Delivery Status: <%= @order.status %>
 
 </p>
 
@@ -26,6 +26,10 @@
 </p>
 
 <p>
-  <%= link_to 'Home', :controller => 'welcome', :action => 'index' %>
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index' %> |
+  <%= link_to 'Requests', :controller => 'requests', :action => 'index' %> |
   <%= link_to 'View All Orders', :controller => 'orders', :action => 'index' %>
+  <% if @order.is_delivered? %>
+  | <%= link_to 'All Reagents', :controller => 'reagents', :action => 'index'%>
+  <% end %>
 </p>

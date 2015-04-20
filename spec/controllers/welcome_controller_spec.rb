@@ -4,7 +4,7 @@ RSpec.describe WelcomeController, type: :controller do
 
   context 'with valid user' do
     before :each do
-      @lunga = ADUser.new('Test','User','TUser@synexagroup.com')
+      @lunga = ADUser.new('Test','User','TUser@synexagroup.com', ['All Users','Synexa Cape Town', 'IT Support'])
       log_in(@lunga)
     end
 

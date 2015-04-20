@@ -18,6 +18,9 @@ class CreateRequests < ActiveRecord::Migration
       t.boolean   :is_reagent_kit
       t.integer   :child_items_no
 
+      #Audit data
+      t.string      :last_changed_by
+      t.string      :date_last_changed
       t.timestamps
     end
   end

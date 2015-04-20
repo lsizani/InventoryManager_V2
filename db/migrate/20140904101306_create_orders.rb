@@ -14,7 +14,12 @@ class CreateOrders < ActiveRecord::Migration
       t.date     :ordered_date
       t.date     :last_date_updated
       t.string   :status
+
+      #Audit data
+      t.string      :last_changed_by
+      t.string      :date_last_changed
       t.timestamps
     end
+
   end
 end

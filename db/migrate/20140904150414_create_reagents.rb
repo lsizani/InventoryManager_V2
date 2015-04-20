@@ -14,6 +14,9 @@ class CreateReagents < ActiveRecord::Migration
       t.string    :status
       t.date      :last_date_updated
 
+      #Audit data
+      t.string      :last_changed_by
+      t.string      :date_last_changed
       t.timestamps
     end
   end

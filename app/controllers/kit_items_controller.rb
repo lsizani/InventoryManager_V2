@@ -11,7 +11,7 @@ class KitItemsController < ApplicationController
 
   def new
     if current_user != nil
-      @kit_item = KitItem.new(create_args)
+      @kit_item = KitItem.new()
       @reagent = Reagent.find(params[:reagent_id])
       @items = KitItem.where('reagent_id=' + params[:reagent_id])
     else
@@ -40,6 +40,7 @@ class KitItemsController < ApplicationController
   private
   def update_now(kit_item, reagent_id)
     ki = KitItem.find(kit_item.id)
-    ki.update(reagent_id: reagent_id)
+    ki.update(date_last_changed:Date.today,
+              last_changed_by: current_user_full_name,reagent_id: reagent_id)
   end
 end

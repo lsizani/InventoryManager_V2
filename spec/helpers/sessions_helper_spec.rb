@@ -5,9 +5,9 @@ require 'lib/ad_user'
 # the SessionsHelper. For example:
 #
 # describe SessionsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
+#   describe 'string concat' do
+#     it 'concats two strings with spaces' do
+#       expect(helper.concat_strings('this','that')).to eq('this that')
 #     end
 #   end
 # end
@@ -16,7 +16,7 @@ RSpec.describe SessionsHelper, type: :helper do
 
   context 'When logging in' do
     before :each do
-      @lunga = ADUser.new('Test','User','TUser@synexagroup.com')
+      @lunga = ADUser.new('Test','User','TUser@synexagroup.com', ['All Users','Synexa Cape Town', 'IT Support'])
       log_in(@lunga)
     end
 
@@ -41,7 +41,7 @@ RSpec.describe SessionsHelper, type: :helper do
 
   context 'When logging out' do
     before :each do
-      @lunga = ADUser.new('Test','User','TUser@synexagroup.com')
+      @lunga = ADUser.new('Test','User','TUser@synexagroup.com', ['All Users','Synexa Cape Town', 'IT Support'])
       log_in(@lunga)
     end
 

@@ -1,7 +1,5 @@
 <h1>Enter Reagent Request Detail:</h1>
 
-
-
 <%= form_for :request, url: requests_path do |r| %>
 
     <% if @request.errors.any? %>
@@ -18,7 +16,7 @@
 
     <p>
       <%= r.label :requested_By %>
-      <%= r.text_field :requested_by, :value=> current_user.first_name.concat(' '.concat(current_user.last_name)), :readonly => true, :class => 'required' %>
+      <%= r.text_field :requested_by, :value=> current_user_full_name, :readonly => true, :class => 'required' %>
       |
       <%= r.label :requested_Date %>
       <%= r.date_select :requested_date  %>

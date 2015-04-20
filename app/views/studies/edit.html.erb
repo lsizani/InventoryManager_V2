@@ -1,5 +1,4 @@
-<h1>Enter New Study Details: </h1>
-
+<h1>Edit Study <%= @study.study_number %></h1>
 <table align="center">
   <thead>
   <td>Study Number</td>
@@ -9,16 +8,17 @@
   <td></td>
   </thead>
   <tbody>
-    <%= form_for :study, url: {:action=>"create", :controller=>"studies"} do |std| %>
+  <%= form_for :study, :url => { :action => 'update' }, :html => { :method => 'put' } do |std| %>
       <td><%= std.text_field :study_number %></td>
       <td><%= std.text_field :study_name %></td>
       <td><%= std.date_select :study_start_date %></td>
       <td><%= std.date_select :study_end_date %></td>
       <td><%= std.submit %></td>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
-           <br>
+<br>
 <div class="navBox">
-  <%= link_to 'Done', :controller => 'dashboard', :action => 'index'  %>
+  <%= link_to 'Done', :controller => 'studies', :action => 'index'  %>
 </div>
+

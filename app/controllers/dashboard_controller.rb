@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
       puts my_hash
       my_hash = my_hash.gsub('---', '')
       File.open(Rails.root.join('config/config.yml'), 'a+'){ |f| f.write(my_hash) }
-      @my_file = YAML::load_file Rails.root.join('config/config.yml')
+      @my_file = settings
       redirect_to :controller => 'dashboard', :action => 'settings'
   end
 

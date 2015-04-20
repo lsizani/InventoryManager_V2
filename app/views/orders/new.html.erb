@@ -67,7 +67,7 @@
       <%= o.label :unit_Price %>
       R <%= o.text_field :unit_price, :class => 'required' %> |
     </p>
-        <%= hidden_field_tag 'request_id', @request.id %>
+        <%= o.hidden_field :request_id, :value => @request.id %>
       <%= o.submit %>
 <% end %>
 
