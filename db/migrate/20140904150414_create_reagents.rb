@@ -2,7 +2,7 @@ class CreateReagents < ActiveRecord::Migration
   def change
     create_table :reagents do |t|
 
-      t.integer   :order_id
+      t.integer   :request_id
       t.decimal   :delivered_amount
       t.string    :item_lot_no
       t.string    :item_cat_no

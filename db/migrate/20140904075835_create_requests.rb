@@ -9,6 +9,13 @@ class CreateRequests < ActiveRecord::Migration
       t.string  :status
       t.date    :last_update_date
 
+      t.string  :order_id
+      t.integer :ordered_amount
+      t.integer :back_order_amount
+      t.decimal :unit_price
+
+      t.integer :reagent_id
+
       #optional fields to aid in order
       t.string :catalog_no
       t.string :manufacturer

@@ -1,78 +1,126 @@
-<h1>Place Order for  <%= @request.reagent_name %></h1>
+<h1>New Order Form</h1>
 
+<table id="order_form" cellspacing="0px">
+  <thead id="form_header" >
+      <tr>
+        <td>
+            <div id="empty">
 
-  <pre>
-    <strong>Requested By:</strong> <%= @request.requested_by %> <br>
-    <strong>Reagent Name:</strong>  <%= @request.reagent_name %> <br>
-    <strong>Requested Date: </strong><%= @request.requested_date  %><br>
-    <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
-    <strong>Requested For Study:  </strong><%= @request.requested_for_study %> <br>
-  </pre>
+            </div>
+        </td>
 
-<%= form_for :order, url: orders_path do |o| %>
-
-    <% if @order.errors.any? %>
-        <div id='error_explanation' class = 'error_explanation'>
-
-          <h3>
-            <%= pluralize(@order.errors.count, 'error') %> prohibited this request from being saved:
-          </h3>
-          <ul>
-            <% @order.errors.full_messages.each do |msg| %>
-                <li><p><%= msg %></p></li>
-            <% end %>
-          </ul>
-
+        <td>
+            <div id="company">
+              <h4>Synexa Life Sciences (Pty) Ltd.</h4>
+              <p>Tel. No./Nr. (021) 933 9580</p>
+              <p> Vat. Reg. No. 4570198913 </p>
+            </div>
+        </td>
+        <td rowspan="2">
+            <div id="address">
+                  <p>FAKTUUR AAN: </p>
+                  <p>INVOICE TO: </p>
+                  <p>hlategan@synexagroup.com</p>
+                  <p>PO Box 1573</p>
+                  <p>Bellville</p>
+                  <p>7535</p>
+                </div>
+        </td>
+        <td>
+            <div id="date">
+              Datum: <br>
+              Date: <br>
+              <%= Date.today %>
+            </div>
+        </td>
+        <td>
+            <div id="order_number">
+              Bestel Nr.:<br>
+              Order No.:<br>
+              <%= OrderNumberCount.first.order_number %>
+            </div>
+        </td>
+      </tr>
+    <tr>
+      <td>
+        <div id="to">
+            <p>AAN</p>
+            <p>TO</p>
         </div>
-    <% end %>
+      </td>
+      <td>
+        <% if @requests != nil %>
+            <%= @requests.first.supplier %>
+        <% else %>
+            <%= form_for :req, url: requests_for_supplier_url  do |f|  %>
+                <div id="supplier">
+                  <%= f.collection_select(:supplier, Request.can_order.select(:supplier).uniq, :supplier , :supplier,
+                                        {:prompt => 'Select Supplier' }) %>
 
-    <p>
-      <%= o.label :order_No %>
-      <%= o.text_field :order_no, :class => 'required'  %>  |
-      <%= o.label :ordered_Date %>
-      <%= o.date_select :ordered_date, :class => 'required' %>
-    </p>
+                    <%= f.submit('Select')  %>
+                </div>
+            <% end %>
+        <% end %>
+      </td>
+      <td colspan="2">
+        <div id="delivery_address">
+          Afleweringsadres:<br>
+          Delivery Address:<br>
+          <br>
+          Synexa Life Sciences (Pty) Ltd.<br>
+          No. 4 Kunene Circle<br>
+          Omuramba Business Park<br>
+          Montague Gardens<br>
+          Milnerton<br>
+          7441
+        </div>
+      </td>
+    </tr>
+      <tr>
+        <td colspan="5"><br></td>
+      </tr>
+  </thead>
+  <tbody id="form_body">
+    <tr>
+      <td>HOEV. <br>AMOUNT</td>
+      <td>BESKRYWING <br>DESCRIPTION</td>
+      <td>KAT. NR. <br>CAT. NO.</td>
+      <td>EENHYDSPRYS <br>UNIT PRICE</td>
+      <td>NETOBEDRAG <br>NET AMOUNT</td>
+    </tr>
+    <form accept-charset="UTF-8" action="make_order" method="post" >
+    <% if @requests != nil %>
+      <% @requests.each do |r| %>
+          <tr>
+            <td >
+                <input type="text" name="order[ordered_amount][<%=r.id%>]" value="<%=r.requested_amount%>" size="4"/>
+            </td>
 
-    <p>
-      <%= o.label :ordered_Amount %>
-      <%= o.text_field :ordered_amount, :class => 'required' %> |
-      <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
-    </p>
-
-    <p>
-      <%= o.label :catalog_No %>
-      <% if @request.catalog_no.blank? %>
-        <%= o.text_field :catalog_no %>
-      <% else %>
-        : <%= @request.catalog_no %>
+            <td><%= r.reagent_name %></td>
+            <td>
+              <input type="text" name="order[catalog_no][<%=r.id%>]" value="<%=r.catalog_no%>"/>
+            </td>
+            <td>
+                <input type="text" name="order[unit_price][<%=r.id%>]" />
+            </td>
+            <td><%= text_field_tag :net_amount %></td>
+          </tr>
       <% end %>
+      <tr>
+        <input type="hidden" name="order[supplier]" value="<%= @requests.first.supplier %>" />
+        <input type="hidden" name="order[ordered_date]" value="<%= Date.today %>" />
+        <input type="hidden" name="order[order_no]" value="<%= OrderNumberCount.first.order_number %>" />
+        <td colspan="5">
+          <input type="submit"/>
+        </td>
+      </tr>
+    <%end%>
+      </form>
+  </tbody>
+</table>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;
-
-        <%= o.label :manufacturer %>
-      <% if @request.manufacturer.blank? %>
-        <%= o.text_field :manufacturer %>
-      <% else %>
-        : <%= @request.manufacturer %>
-      <% end %>
-      &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;
-        <%= o.label :supplier %>
-      <% if @request.supplier.blank? %>
-        <%= o.text_field :supplier %>
-      <% else %>
-       :  <%= @request.supplier %>
-      <% end %>
-    </p>
-    <p>
-      <%= o.label :unit_Price %>
-      R <%= o.text_field :unit_price, :class => 'required' %> |
-    </p>
-        <%= o.hidden_field :request_id, :value => @request.id %>
-      <%= o.submit %>
-<% end %>
-
-<br>
 <div class='navBox'>
   <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
-  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
 </div>

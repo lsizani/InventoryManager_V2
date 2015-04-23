@@ -1,28 +1,27 @@
 class Order < ActiveRecord::Base
-  belongs_to :request
-  delegate :reagent_name, :requested_by, :requested_for_study,:requested_amount, :requested_date, :is_reagent_kit,
-           :to => :request, :prefix => true
-  has_one :reagent
-
+  has_many :requests
   validates :order_no, presence: true
-  validates :ordered_amount, presence: true
 
-  def update_now(request_id)
+  def update_now(params)
       self.update(status: 'Ordered')
 
-      re = Request.find_by_id(request_id)
-      re.update_now('Ordered')
+      new_num = OrderNumberCount.first.order_number + 1
+      OrderNumberCount.first.update(order_number: new_num)
 
-      if self.supplier.blank?
-        self.update(supplier: re.supplier)
+      Request.where(supplier: self.supplier).each do |r|
+        r.update(status: 'Ordered', order_id: self.id)
       end
 
-      if self.manufacturer.blank?
-        self.update(manufacturer: re.manufacturer)
+      params[:ordered_amount].each do |om|
+        Request.find(om[0]).update(ordered_amount: om[1])
       end
 
-      if self.catalog_no.blank?
-        self.update(catalog_no:re.catalog_no)
+      params[:catalog_no].each do |om|
+        Request.find(om[0]).update(catalog_no: om[1])
+      end
+
+      params[:unit_price].each do |om|
+        Request.find(om[0]).update(unit_price: om[1])
       end
   end
 
@@ -30,7 +29,20 @@ class Order < ActiveRecord::Base
     %w(OBO DELIVERED).include?self.status
   end
 
-  def save
-    super
+  def sub_total
+    sum = 0
+    self.requests.each do |re|
+      sum += re.net_amount
+    end
+    return sum
   end
+
+  def vat_amount
+    self.sub_total * 0.14
+  end
+
+  def final_total
+    self.sub_total + self.vat_amount
+  end
+
 end

@@ -1,8 +1,8 @@
-<h1>Generated Label For: <%= @request.reagent_name%></h1>
+<h1>Generated Label For: <%= @reagent.request_reagent_name%></h1>
 
 <div class="showBox" align="left">
-   <p>Reagent Name: <%= @request.reagent_name %> | Order Number: <%= @order.order_no %></p>
-   <p>Requested Date: <%= @request.requested_date %> | Ordered Date: <%= @order.ordered_date %></p>
+   <p>Reagent Name: <%= @reagent.request_reagent_name %> | Order Number: <%= @reagent.request_order.order_no %></p>
+   <p>Requested Date: <%= @reagent.request_requested_date %> | Ordered Date: <%= @reagent.request_order.ordered_date %></p>
    <p>Received Date: <%= @reagent.received_date %> | Expiration Date: <%= @reagent.expiration_date %></p>
    <p>Storage Temp: <%= @reagent.storage_temp_kit %> &deg;<strong>C</strong> | Storage Location: <%= @reagent.storage_location %></p>
 

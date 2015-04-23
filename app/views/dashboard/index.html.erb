@@ -2,15 +2,17 @@
 <h1>Admin Dashboard</h1>
 
 
-<div class="homeBox">
+<div class='homeBox'>
   <%= link_to 'Manage Studies', :controller => 'studies', :action => 'index'%>   |
 
   <%= link_to 'Reports', :controller => 'reports', :action => 'index' %>       |
 
-  <%= link_to 'System Config', :controller => 'dashboard', :action => 'settings'%>
+  <%= link_to 'System Config', :controller => 'dashboard', :action => 'settings'%> |
+
+  <%= link_to 'Data Imports', :controller => 'dashboard', :action => 'settings'%>
 </div>
 
-<div class="adminBox">
+<div class='adminBox'>
   <%= link_to 'Main Home', :controller => 'welcome', :action => 'index' %>
 
 </div>

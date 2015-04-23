@@ -4,23 +4,95 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<h1>An order has </h1>
+<table id="order_form" cellspacing="0px">
+  <thead id="form_header" >
+  <tr>
+    <td>
+      <div id="empty">
 
-<h2><underline><%= @request.reagent_name %> Request Summary</underline></h2>
+      </div>
+    </td>
 
-<p>
-  Requested By: <%= @request.requested_by %> <br>
-  Requested Date: <%= @request.requested_date  %>
-</p>
+    <td>
+      <div id="company">
+        <h4>Synexa Life Sciences (Pty) Ltd.</h4>
+        <p>Tel. No./Nr. (021) 933 9580</p>
+        <p> Vat. Reg. No. 4570198913 </p>
+      </div>
+    </td>
+    <td rowspan="2">
+      <div id="address">
+        <p>FAKTUUR AAN: </p>
+        <p>INVOICE TO: </p>
+        <p>hlategan@synexagroup.com</p>
+        <p>PO Box 1573</p>
+        <p>Bellville</p>
+        <p>7535</p>
+      </div>
+    </td>
+    <td>
+      <div id="date">
+        Datum: <br>
+        Date: <br>
+        <%= @order.ordered_date %>
+      </div>
+    </td>
+    <td>
+      <div id="order_number">
+        Bestel Nr.:<br>
+        Order No.:<br>
+        <%= @order.order_no %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div id="to">
+        <p>AAN</p>
+        <p>TO</p>
+      </div>
+    </td>
+    <td>
 
-<p>
-  Reagent Name:  <%= @request.reagent_name %> <br>
-  Requested_Amount: <%= @request.requested_amount %>
-</p>
+      <%= @order.supplier %>
 
-<p>
-  Requested For Study:  <%= @request.requested_for_study %> <br>
-</p>
-Click on this link to view: <%= @url %>
+    </td>
+    <td colspan="2">
+      <div id="delivery_address">
+        Afleweringsadres:<br>
+        Delivery Address:<br>
+        <br>
+        Synexa Life Sciences (Pty) Ltd.<br>
+        No. 4 Kunene Circle<br>
+        Omuramba Business Park<br>
+        Montague Gardens<br>
+        Milnerton<br>
+        7441
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5"><br></td>
+  </tr>
+  </thead>
+  <tbody id="form_body">
+  <tr>
+    <td>HOEV. <br>AMOUNT</td>
+    <td>BESKRYWING <br>DESCRIPTION</td>
+    <td>KAT. NR. <br>CAT. NO.</td>
+    <td>EENHYDSPRYS <br>UNIT PRICE</td>
+    <td>NETOBEDRAG <br>NET AMOUNT</td>
+  </tr>
+  <% @order.requests.each do |r| %>
+      <tr>
+        <td ><%= r.requested_amount %></td>
+        <td><%= r.reagent_name %></td>
+        <td><%= r.catalog_no %> </td>
+        <td><%= @order.unit_price %></td>
+        <td><%= r.requested_amount * @order.unit_price %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
 </body>
 </html>

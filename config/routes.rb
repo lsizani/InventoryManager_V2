@@ -10,6 +10,10 @@ InventoryManagerV2::Application.routes.draw do
   get    'logout'           => 'sessions#destroy'
   get    'settings'         => 'dashboard#settings'
   get    'download_report'  => 'reagents#dump_to_csv'
+  post   'dashboard/create' => 'dashboard#create'
+  get    'remove_setting'   => 'dashboard#remove'
+  post   'requests_for_supplier' => 'orders#requests_for_supplier'
+  post   'make_order'           => 'orders#create'
   namespace :admin do
     root 'admin#index'
   end

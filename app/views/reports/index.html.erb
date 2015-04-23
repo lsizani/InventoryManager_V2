@@ -1,9 +1,9 @@
 <%= render :partial => '/current_user'  %>
 <h2>Reports Page</h2>
 
-<%= form_for :study, url: {:controller => 'reports', :action => 'create'}, method: :post do |f|  %>
+<%= form_for :report, url: {:controller => 'reports', :action => 'create', format: 'csv'}, method: :post do |f|  %>
     <p>Select your study from the list: </p>
-    <%= f.collection_select(:id, Study.all, :id, :study_number, {:prompt => 'All'}) %>
+    <%= f.collection_select(:study_number, Study.all, :study_number, :study_number, {:prompt => 'All'}) %>
     <p><%= check_box('table', 'selection', {:multiple => true}, 'Reagents', nil) %>Reagents|
       <%= date_select 'reagents', 'reagents ' %> Received Date
     </p>

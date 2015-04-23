@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
-  caches_page :show
+
+  include ReagentsHelper
 
   def index
     if current_user != nil
@@ -10,11 +11,7 @@ class ReportsController < ApplicationController
 
   def show
     if current_user != nil
-      id = params[:id]
-      tables = params[:selection].to_a
-
-      @object = ReportObject.new
-      @object.assign(id, tables)
+      redirect_to index
     else
       redirect_to root_path
     end
@@ -22,8 +19,14 @@ class ReportsController < ApplicationController
   end
 
   def create
-    redirect_to :controller => 'reports',
-                :action => 'show', :id => params[:study][:id], :selection => params[:table][:selection]
+    date = Date.new(params[:reagents]['reagents (1i)'].to_i,
+                    params[:reagents]['reagents (2i)'].to_i,
+                    params[:reagents]['reagents (3i)'].to_i)
+    @reagents = Reagent.on_or_before(date)
+
+    respond_to do |format|
+      format.csv { send_data @reagents.to_csv }
+    end
   end
 
   def study_cost

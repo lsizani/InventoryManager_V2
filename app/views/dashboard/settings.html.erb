@@ -1,23 +1,24 @@
+<%= render :partial => '/current_user'  %>
+
 <h1>Add/Remove System Variables</h1>
 
-<table align="center" id="filter">
+<table align='center' id='filter'>
 <thead>
 <tr>
   <td>Setting</td>
   <td>Value</td>
 </tr>
 </thead>
-<tbody id="altColors">
-<%= form_for :setting, url: { :controller=> 'dashboard', :action => 'create', } do |it| %>
-<% @settings.each  do |k, v| %>
+<tbody id='altColors'>
+<%= form_for :setting, url: { :controller=> 'dashboard', :action => 'create' } do |it| %>
+<% @settings.each  do |setting_key, setting_values| %>
     <tr>
         <td>
-          <%= it.text_field :key, :value => k.inspect %> <br>
+          <%= it.text_field :key, :value => setting_key.inspect %> <br>
         </td>
 
-        <td><% v.each  do |vk, vv| %> <br>
-                <p><%= it.text_field :val, :value =>  vv.inspect %> <%= link_to 'remove' %></p>
-            <% end %>
+        <td><%= it.text_field :val, :value =>  setting_values.inspect %>
+          <%= link_to 'remove', :controller => 'dashboard', :action => 'remove', :key => setting_key %>
          </td>
     </tr>
 <% end %>
@@ -33,3 +34,8 @@
     <% end %>
     </tbody>
 </table>
+
+
+<div class='navBox'>
+  <%= link_to 'Front Desk', :controller => 'dashboard', :action => 'index'  %>
+</div>

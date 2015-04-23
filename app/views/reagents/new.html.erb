@@ -1,23 +1,23 @@
 <h1>
-  <% if @order.request_is_reagent_kit %>
-      Delivery Log for <%= @order.request_reagent_name %> Kit
-  <% else %>
-      Delivery Log for <%= @order.request_reagent_name %>
+  Delivery Log for <%= @request.reagent_name %>
+  <% if @request.is_reagent_kit %>
+      Kit
   <% end %>
+
 </h1>
 
 <p>
-  <strong>Requested By:</strong> <%= @order.request_requested_by %>    <strong>Order Number: </strong> <%= @order.order_no %><br>
-  <strong>Requested Date:</strong> <%= @order.request_requested_date  %>    <strong>Ordered Date: </strong> <%= @order.ordered_date %> <br>
+  <strong>Requested By:</strong> <%= @request.requested_by %>    <strong>Order Number: </strong> <br>
+  <strong>Requested Date:</strong> <%= @request.requested_date  %>    <strong>Ordered Date: </strong> <%= @request.order.ordered_date %> <br>
 </p>
 
 <p>
-  <strong>Reagent Name:</strong>  <%= @order.request_reagent_name %> <br>
-  <strong>Requested_Amount:</strong> <%= @order.request_requested_amount %>
+  <strong>Reagent Name:</strong>  <%= @request.reagent_name %> <br>
+  <strong>Requested_Amount:</strong> <%= @request.requested_amount %>
 </p>
 
 <p>
-  <strong>Requested For Study:</strong>  <%= @order.request_requested_for_study %> <br>
+  <strong>Requested For Study:</strong>  <%= @request.requested_for_study %> <br>
 </p>
 
 
@@ -47,7 +47,7 @@
       <%= r.text_field :item_lot_no %>
 
       <%= r.label :cat_Number %>
-      <%= r.text_field :item_cat_no, :value => @order.catalog_no %>
+      <%= r.text_field :item_cat_no, :value => @request.catalog_no %>
     </p>
 
     <p>
@@ -61,8 +61,14 @@
     <p>
       <%= r.label :delivered_Amount %>
       <%= r.text_field :delivered_amount %>    |
-      <strong>Requested_Amount: </strong><%= @order.request_requested_amount %> Units<br>
+      <strong>Requested_Amount: </strong><%= @request.requested_amount %> Units<br>
     </p>
-    <%= hidden_field_tag 'order_id', @order.id %>
+    <%= r.hidden_field :request_id, :value => @request.id %>
     <%= r.submit %>
 <% end %>
+
+<div class='navBox'>
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

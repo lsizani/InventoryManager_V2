@@ -4,55 +4,31 @@
 <table align="center" id='filter'>
   <thead>
    <tr>
-    <td>Reagent Name</td>
-    <td>Requested By</td>
-    <td>Requested For Study</td>
-    <td>Requested amount</td>
-    <td>Ordered amount</td>
-    <td>Request Date</td>
-    <td>Order Date</td>
-    <td>Order Status</td>
     <td>Order Number</td>
-    <td>Catalog Number</td>
-    <td>Manufacturer</td>
     <td>Supplier</td>
-    <td>Edit / Place Order</td>
+    <td>Order Date</td>
+    <td>View Form</td>
    </tr>
   </thead>
   <tbody id="altColors">
-  <% @orders.each do |order| %>
+    <% @orders.each do |order| %>
           <tr>
-            <td><%=order.request_reagent_name %></td>
-            <td><%=order.request_requested_by %></td>
-            <td><%=order.request_requested_for_study %></td>
-            <td><%=order.request_requested_amount %></td>
-            <td><%=order.ordered_amount %></td>
-            <td><%=order.request_requested_date %></td>
-            <td><%=order.ordered_date %></td>
-            <td><%=order.status %></td>
-            <td><%=order.order_no %></td>
-            <td><%=order.catalog_no %></td>
-            <td><%=order.manufacturer %></td>
-            <td><%=order.supplier %></td>
-            <td>
-              <p>
-                <% if order.on_back_order %>
-                    <%= link_to 'Receive Order', :controller => 'reagents', :action => 'edit', :id => order.id %>
-                <% else %>
-                    <%= link_to 'Receive Order', :controller => 'reagents', :action => 'new', :id => order.id %>
-                <% end %>
-              </p>
-            </td>
+            <td><%= order.order_no %></td>
+            <td><%= order.supplier %></td>
+            <td><%= order.ordered_date %></td>
+            <td><%= link_to 'Order Form', :controller => 'orders', :action => 'show', :id => order.id %></td>
           </tr>
-        <% end %>
+    <% end %>
   </tbody>
-
-
 </table>
   <br>
+
+</div>
+<div class='navBox'>
+  <%= link_to 'New Order', :controller => 'orders', :action => 'new' %>
 </div>
 <br>
-<div class="navBox">
+<div class='navBox'>
   <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
   <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
   <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414135234) do
+ActiveRecord::Schema.define(version: 20150423145557) do
 
   create_table "kit_items", force: true do |t|
     t.integer  "reagent_id"
@@ -55,17 +55,17 @@ ActiveRecord::Schema.define(version: 20150414135234) do
     t.datetime "updated_at"
   end
 
+  create_table "order_number_counts", force: true do |t|
+    t.integer  "order_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
-    t.integer  "request_id"
     t.string   "order_no"
-    t.string   "catalog_no"
-    t.decimal  "unit_price",               precision: 10, scale: 0
-    t.string   "manufacturer"
     t.string   "supplier"
-    t.decimal  "ordered_amount",           precision: 10, scale: 0
     t.boolean  "on_back_order"
-    t.decimal  "back_order_amount",        precision: 10, scale: 0, default: 0
-    t.decimal  "back_order_delivery_date", precision: 10, scale: 0
+    t.date     "back_order_delivery_date"
     t.date     "ordered_date"
     t.date     "last_date_updated"
     t.string   "status"
@@ -75,8 +75,10 @@ ActiveRecord::Schema.define(version: 20150414135234) do
     t.datetime "updated_at"
   end
 
+  add_index "orders", ["id"], name: "index_orders_on_id", using: :btree
+
   create_table "reagents", force: true do |t|
-    t.integer  "order_id"
+    t.integer  "request_id"
     t.decimal  "delivered_amount",  precision: 10, scale: 0
     t.string   "item_lot_no"
     t.string   "item_cat_no"
@@ -93,6 +95,8 @@ ActiveRecord::Schema.define(version: 20150414135234) do
     t.datetime "updated_at"
   end
 
+  add_index "reagents", ["id"], name: "index_reagents_on_id", using: :btree
+
   create_table "requests", force: true do |t|
     t.string   "reagent_name"
     t.string   "requested_by"
@@ -101,6 +105,11 @@ ActiveRecord::Schema.define(version: 20150414135234) do
     t.date     "requested_date"
     t.string   "status"
     t.date     "last_update_date"
+    t.string   "order_id"
+    t.integer  "ordered_amount"
+    t.integer  "back_order_amount"
+    t.decimal  "unit_price",          precision: 10, scale: 0
+    t.integer  "reagent_id"
     t.string   "catalog_no"
     t.string   "manufacturer"
     t.string   "supplier"

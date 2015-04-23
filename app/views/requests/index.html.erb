@@ -27,12 +27,10 @@
           <td>
             <p>
               <% if request.show_edit_link? %>
-                <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %> |
+                <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %>
               <% end %>
-              <% if request.show_order_link?%>
-                <%= link_to 'Order reagent', :controller => 'orders', :action => 'new', :id => request.id %>
-              <% else %>
-                  <%= link_to 'View order', :controller => 'orders', :action => 'show', :id=> request.id %>
+              <% if request.show_receive_link?%>
+                  <%= link_to 'Log Reagent', :controller => 'reagents', :action => 'new', :id => request.id  %>
               <% end %>
             </p>
           </td>

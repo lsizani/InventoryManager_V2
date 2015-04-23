@@ -1,35 +1,119 @@
-<h1><%= @order.request_reagent_name %> Order Summary </h1>
+<h1>New Order Form</h1>
 
-<p>
-  Order Number: <%= @order.order_no %> | Delivery Status: <%= @order.status %>
+<table id="order_form" cellspacing="0px">
+  <thead id="form_header" >
+  <tr>
+    <td>
+      <div id="empty">
 
-</p>
+      </div>
+    </td>
 
-<p>
-  Catalog Number: <%= @order.catalog_no %>   |
+    <td>
+      <div id="company">
+        <h4>Synexa Life Sciences (Pty) Ltd.</h4>
+        <p>Tel. No./Nr. (021) 933 9580</p>
+        <p> Vat. Reg. No. 4570198913 </p>
+      </div>
+    </td>
+    <td rowspan="2">
+      <div id="address">
+        <p>FAKTUUR AAN: </p>
+        <p>INVOICE TO: </p>
+        <p>hlategan@synexagroup.com</p>
+        <p>PO Box 1573</p>
+        <p>Bellville</p>
+        <p>7535</p>
+      </div>
+    </td>
+    <td>
+      <div id="date">
+        Datum: <br>
+        Date: <br>
+        <%= @order.ordered_date %>
+      </div>
+    </td>
+    <td>
+      <div id="order_number">
+        Bestel Nr.:<br>
+        Order No.:<br>
+        <%= @order.order_no %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div id="to">
+        <p>AAN</p>
+        <p>TO</p>
+      </div>
+    </td>
+    <td>
 
-  Ordered Amount: <%= @order.ordered_amount %> |
+          <%= @order.supplier %>
 
-  Unit Price: R <%= @order.unit_price %> | Total: R <%=  "#{@order.unit_price * @order.ordered_amount}" %>
+    </td>
+    <td colspan="2">
+      <div id="delivery_address">
+        Afleweringsadres:<br>
+        Delivery Address:<br>
+        <br>
+        Synexa Life Sciences (Pty) Ltd.<br>
+        No. 4 Kunene Circle<br>
+        Omuramba Business Park<br>
+        Montague Gardens<br>
+        Milnerton<br>
+        7441
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5"><br></td>
+  </tr>
+  </thead>
+  <tbody id="form_body">
+  <tr>
+    <td>HOEV. <br>AMOUNT</td>
+    <td>BESKRYWING <br>DESCRIPTION</td>
+    <td>KAT. NR. <br>CAT. NO.</td>
+    <td>EENHYDSPRYS <br>UNIT PRICE</td>
+    <td>NETOBEDRAG <br>NET AMOUNT</td>
+  </tr>
+      <% @order.requests.each do |r| %>
+          <tr>
+            <td ><%= r.requested_amount %></td>
+            <td><%= r.reagent_name %></td>
+            <td><%= r.catalog_no %> </td>
+            <td><%= r.unit_price %></td>
+            <td><%= r.net_amount %></td>
+          </tr>
+      <% end %>
+      <tr>
+        <td colspan="5"> &nbsp;</td>
+      </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td align="right">SUB TOTAL</td>
+          <td>&nbsp</td>
+          <td><%= @order.sub_total %></td>
+        </tr>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+        <td align="right">VAT</td>
+        <td>&nbsp;</td>
+        <td><%= number_with_precision(@order.vat_amount, :precision => 2) %></td>
+      </tr>
+      <tr >
+        <td colspan="2">&nbsp;</td>
+        <td align="right">TOTAL</td>
+        <td>&nbsp</td>
+        <td><%= @order.final_total %></td>
+      </tr>
+  </tbody>
+</table>
 
-</p>
-
-<p>
-  Ordered Date: <%= @order.ordered_date %>
-</p>
-
-<p>
-  Manufacturer: <%= @order.manufacturer %>
-  Supplier: <%= @order.supplier %>
-
-  Request ID: <%= @order.request_id%>
-</p>
-
-<p>
-  <%= link_to 'Home', :controller => 'welcome', :action => 'index' %> |
-  <%= link_to 'Requests', :controller => 'requests', :action => 'index' %> |
-  <%= link_to 'View All Orders', :controller => 'orders', :action => 'index' %>
-  <% if @order.is_delivered? %>
-  | <%= link_to 'All Reagents', :controller => 'reagents', :action => 'index'%>
-  <% end %>
-</p>
+<div class='navBox'>
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

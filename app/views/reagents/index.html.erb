@@ -16,13 +16,17 @@
   </thead>
   <tbody id="altColors">
   <% @reagents.each do |rea| %>
-      <tr>
-        <td> <%= rea.order.request_reagent_name%> </td>
+      <% if rea.about_to_expire? %>
+         <tr id='danger'>
+      <% else %>
+          <tr>
+      <% end %>
+        <td> <%= rea.request_reagent_name%> </td>
         <td> <%=rea.item_lot_no%> </td>
         <td> <%=rea.item_cat_no%> </td>
         <td> <%=rea.delivered_amount%> </td>
         <td> <%=rea.amount_left%> </td>
-        <% if rea.order.request_is_reagent_kit %>
+        <% if rea.request_is_reagent_kit %>
             <td> <%= link_to 'Kit', :controller => 'kit_items', :action => 'index', :reagent_id => rea.id %> </td>
         <% else %>
             <td><%= link_to 'Item', :controller => 'logs', :action => 'index', :reagent_id => rea.id %></td>

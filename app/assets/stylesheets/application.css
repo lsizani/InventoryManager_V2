@@ -15,6 +15,11 @@
  *= require filtergrid
  */
 
+
+#danger{
+    background-color: #FF3333;
+}
+
 .danger{
     background-color: #FF3333;
     color: black;
@@ -117,9 +122,7 @@ h3{
 
 
 table{
- border:  1px solid #00aaaa;
-
-
+    border:  1px solid #00aaaa;
 }
 
 .evenRow{
@@ -168,4 +171,66 @@ form{
     font-size: 20px;
     border: 1px solid #000000;
     padding: 20px;
+}
+
+form.button_to {
+   border: none;
+}
+
+
+table#order_form{
+    border: 1px solid #000000;
+}
+
+thead#form_header tr td{
+    color: #000000;
+}
+tbody#form_body tr td{
+    border: 1px solid #000000;
+    font-size: 12px;
+}
+div#empty{
+    padding: 15px;
+}
+
+
+div#company{
+    padding: 15px;
+    font-size: 12px;
+}
+
+div#address{
+    padding: 15px;
+    font-size: 12px;
+}
+
+
+div#to{
+    font-size: 12px;
+    padding: 15px;
+
+}
+
+div#supplier{
+    font-size: 12px;
+    padding: 15px;
+
+}
+
+div#date{
+    font-size: 12px;
+    padding: 5px;
+
+}
+
+div#order_number{
+    font-size: 12px;
+    padding: 5px;
+
+}
+
+div#delivery_address{
+    font-size: 12px;
+    padding: 15px;
+
 }
