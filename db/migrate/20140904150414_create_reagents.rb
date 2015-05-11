@@ -9,7 +9,6 @@ class CreateReagents < ActiveRecord::Migration
       t.string    :storage_temp_kit
       t.string    :storage_location
       t.decimal   :amount_left
-      t.date      :received_date
       t.date      :expiration_date
       t.string    :status
       t.date      :last_date_updated

@@ -14,6 +14,12 @@ InventoryManagerV2::Application.routes.draw do
   get    'remove_setting'   => 'dashboard#remove'
   post   'requests_for_supplier' => 'orders#requests_for_supplier'
   post   'make_order'           => 'orders#create'
+  get    'imports_index'        => 'imports#index'
+  post   'file_import_path'     => 'imports#upload'
+  post    'file_process_path'    => 'imports#process_file'
+
+
+
   namespace :admin do
     root 'admin#index'
   end

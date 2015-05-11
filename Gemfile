@@ -18,3 +18,5 @@ gem 'actionpack-page_caching'
 gem "rspec-rails", :group => [:development, :test]
 gem 'factory_girl_rails'
 gem 'net-ldap'
+gem 'roo'
+gem 'carrierwave'

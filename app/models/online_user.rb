@@ -1,3 +1,3 @@
 class OnlineUser < ActiveRecord::Base
-  #serialize :groups
+  serialize :groups
 end

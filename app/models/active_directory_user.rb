@@ -62,7 +62,7 @@ class ActiveDirectoryUser
 
   # Exposing the raw Net::LDAP::Entry is probably overkill, but could be set
   # up by uncommenting the line below if you disagree.
-  # attr_reader :entry
+  #attr_reader :entry
 
   ### END CONFIGURATION ###
 

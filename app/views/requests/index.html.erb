@@ -1,6 +1,6 @@
 <%= render :partial => '/current_user'  %>
-<h1>Reagent Requests</h1>
-
+<h1>All Requests</h1>
+<div class="scroll">
 <table align="center" id="filter">
   <thead>
    <tr>
@@ -37,9 +37,8 @@
         </tr>
     <% end %>
   </tbody>
-
-
 </table>
+</div>
 <br>
 <div class="navBox">
     <%= link_to 'New Request', :controller => 'requests', :action => 'new'  %>  |

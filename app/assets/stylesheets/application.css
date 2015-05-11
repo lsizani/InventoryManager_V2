@@ -27,6 +27,17 @@
 
 }
 
+.no_connection{
+    background-color: #3cb790;
+    color: black;
+    border-radius: 3px;
+
+}
+
+#warn{
+    background-color: #FFA500;
+}
+
 .log_in{
     border: 1px solid #000000;
     width: 35%;

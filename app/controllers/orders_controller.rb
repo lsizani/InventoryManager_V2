@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     if current_user != nil
-      @orders = Order.where(status: %w(OBO Ordered))
+      @orders = Order.where(status: %w(OBO Ordered Delivered))
     else
       redirect_to root_path
     end

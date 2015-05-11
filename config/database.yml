@@ -20,6 +20,6 @@ production:
   database: inventory_prod
   username: rails_user
   password: 5yn3x@_2001
-  host: localhost
+  host: /var/run/mysqld/mysqld.sock
   #socket: /home/rubyadmin/rubystack-2.0.0-23/mysql/tmp/mysql.sock
   #port: 3306

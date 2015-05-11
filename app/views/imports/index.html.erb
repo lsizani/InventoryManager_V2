@@ -1,0 +1,13 @@
+<h1>Select Data File</h1>
+
+<%= form_tag({action: :upload}, multipart: true) do %>
+    <%= file_field_tag 'spreadsheet' %>
+    <%= submit_tag %>
+<% end %>
+
+<br>
+<div class='navBox'>
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

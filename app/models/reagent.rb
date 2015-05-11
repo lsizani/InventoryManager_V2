@@ -30,7 +30,11 @@ class Reagent < ActiveRecord::Base
   end
 
   def about_to_expire?
-    self.expiration_date.year == Date.today.year and self.expiration_date.month - Date.today.month <= 1
+    (not self.expired?) and self.expiration_date.year == Date.today.year and Date.today.month - self.expiration_date.month <= 1
+  end
+
+  def expired?
+    self.expiration_date < Date.today
   end
 
 end

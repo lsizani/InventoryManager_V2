@@ -21,3 +21,4 @@
 
 en:
   hello: "Hello world"
+  UPLOAD_DIR: "/home/lsizani/dev/uploads"

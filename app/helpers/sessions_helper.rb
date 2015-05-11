@@ -1,8 +1,11 @@
 module SessionsHelper
   def log_in(user)
-    groups = user.user_groups, Proc.new{|g|  g.gosub("\" ") }
+    groups = user.groups
+    groups.each do |g|
+      puts(g + ' ' +g.length.to_s)
+    end
     online_user = OnlineUser.new(first_name: user.first_name,
-                                 last_name: user.last_name, email: user.email, groups: user.user_groups)
+                                 last_name: user.last_name, email: user.email, groups: groups)
     if online_user.save
       session[:user_id] = online_user.id
     end

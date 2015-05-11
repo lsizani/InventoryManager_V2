@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423145557) do
+ActiveRecord::Schema.define(version: 20150423170211) do
 
   create_table "kit_items", force: true do |t|
     t.integer  "reagent_id"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150423145557) do
     t.string   "date_last_changed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "units"
   end
 
   create_table "studies", force: true do |t|
@@ -128,6 +129,14 @@ ActiveRecord::Schema.define(version: 20150423145557) do
     t.date     "study_end_date"
     t.string   "last_changed_by"
     t.string   "date_last_changed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "units", force: true do |t|
+    t.string   "unit_name"
+    t.string   "unit_symbol"
+    t.string   "unit_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

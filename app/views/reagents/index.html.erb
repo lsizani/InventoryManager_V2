@@ -1,5 +1,6 @@
 <%= render :partial => '/current_user'  %>
 <h1>Reagents in Storage</h1>
+<div class="scroll">
 <table align='center' id='filter'>
   <thead>
     <tr>
@@ -17,9 +18,11 @@
   <tbody id="altColors">
   <% @reagents.each do |rea| %>
       <% if rea.about_to_expire? %>
-         <tr id='danger'>
+         <tr id='warn'>
+      <% elsif rea.expired?  %>
+          <tr id='danger'>
       <% else %>
-          <tr>
+         <tr>
       <% end %>
         <td> <%= rea.request_reagent_name%> </td>
         <td> <%=rea.item_lot_no%> </td>
@@ -39,7 +42,7 @@
   <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 <div class="navBox">
   <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |

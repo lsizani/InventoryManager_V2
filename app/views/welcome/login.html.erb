@@ -5,6 +5,10 @@
       <% if flash[:danger] %>
           <span class='danger'><%= flash[:danger] %></span>
       <% end %>
+
+      <% if flash[:no_connection] %>
+          <span class='no_connection'><%= flash[:no_connection] %></span>
+      <% end %>
       <br>
         <%= s.text_field :user_name , :placeholder => 'User Name'%> <br><br>
         <%= s.password_field :password , :placeholder => 'Password' %> <br>

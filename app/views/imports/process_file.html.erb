@@ -1,0 +1,45 @@
+<h1>Importing: <%= @fname %> </h1>
+<div>
+<table align="center" id="filter">
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>Requested By (Initials)</th>
+    <th>Requested For Study</th>
+    <th>Date</th>
+    <th>Request Status</th>
+    <th>Last Date Updated</th>
+    <th>Order Number</th>
+    <th>Supplier</th>
+  </tr>
+  </thead>
+  <tbody id="altColors">
+  <% @data.each do |sheet| %>
+      <% puts('Starting: ' + sheet + ' ' + @xlsx.sheet(sheet).last_row.to_s)  %>
+      <tr><td colspan="8"><h3><%= sheet %></h3></td></tr>
+      <% (4.. get_last_index(@xlsx.sheet(sheet))).each do |i| %>
+          <% s = @xlsx.sheet(sheet).row(i) %>
+          <tr>
+            <td><%= s[3] %></td>
+            <td><%= s[1] %></td>
+            <td><%= sheet %></td>
+            <td><%= s[0] %></td>
+            <td><%= 'Delivered' %></td>
+            <td><%= s[11] %></td>
+            <td><%= s[12] %></td>
+            <td><%= s[13] %></td>
+      <% end %>
+      </tr>
+      <% puts('Finished: ' + sheet ) %>
+
+  <% end %>
+  </tbody>
+</table>
+
+</div>
+<br>
+<div class='navBox'>
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

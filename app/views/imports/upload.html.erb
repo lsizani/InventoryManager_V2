@@ -1,0 +1,12 @@
+<h3>Choose sheets to import data from</h3>
+<%= form_for :data, :url => { :controller => 'imports', :action => 'process_file' } do |f| %>
+    <% @file.sheets.each do |sheet| %>
+        <%= f.check_box sheet %> <%= sheet %>  <br>
+    <% end %>
+    <%= f.hidden_field :fname, :value => @filename %>
+    <%= f.submit %>
+<% end %>
+
+<div class="navBox">
+<%= link_to 'Back', :controller => 'imports', :action => 'index' %>
+</div>
