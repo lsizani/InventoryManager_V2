@@ -52,7 +52,7 @@
         <% if @requests != nil %>
             <%= @requests.first.supplier %>
         <% else %>
-            <%= form_for :req, url: requests_for_supplier_url  do |f|  %>
+            <%= form_for :req, url: requests_for_supplier_path  do |f|  %>
                 <div id="supplier">
                   <%= f.collection_select(:supplier, Request.can_order.select(:supplier).uniq, :supplier , :supplier,
                                         {:prompt => 'Select Supplier' }) %>
