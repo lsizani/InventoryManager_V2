@@ -25,3 +25,5 @@ Gemfile.lock
 #Ignore IDE files
 .idea/*
 
+#Ignore uploaded files
+/public/uploads/*
