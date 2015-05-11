@@ -1,8 +1,8 @@
 ---
-chdir: /home/rubyadmin/rubystack-2.0.0-23/projects/InventoryManager_V2
+chdir: /home/lunga/apps/InventoryManager_V2
 environment: production
-address: 0.0.0.0
-port: 80
+address: 127.0.0.1
+port: 5000
 timeout: 30
 log: log/thin.log
 pid: tmp/pids/thin.pid
