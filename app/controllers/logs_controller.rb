@@ -1,27 +1,17 @@
 class LogsController < ApplicationController
 
   def index
-    if current_user != nil
       @reagent_id =  params[:reagent_id]
       @reagent = Reagent.find(@reagent_id)
       @log = Log.where(:reagent_id =>  params[:reagent_id])
-    else
-      redirect_to root_path
-    end
-
   end
 
   def new
-    if current_user != nil
       @log = Log.new()
       @reagent = Reagent.find(params[:reagent_id])
       if params[:id] != nil
         @kit_item = KitItem.find(params[:id])
       end
-    else
-      redirect_to root_path
-    end
-
   end
 
   def create

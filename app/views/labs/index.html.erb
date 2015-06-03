@@ -1,0 +1,20 @@
+<%= render :partial => '/current_user'  %>
+
+<h1>All Labs</h1>
+
+<table>
+  <tbody>
+    <% @labs.each do |lab| %>
+        <tr>
+            <td><%= lab.name %></td>
+            <td><%= link_to 'Delete Lab' , :action => 'destroy', :controller => 'labs', :id => lab.id %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Add Lab' , :action => 'new', :controller => 'labs'%>
+
+<div class="navBox">
+  <%= link_to 'Back', :controller => 'dashboard', :action => 'index'%> |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
+</div>

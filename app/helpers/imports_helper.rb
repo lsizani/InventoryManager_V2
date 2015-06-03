@@ -73,7 +73,6 @@ module ImportsHelper
                           is_reagent_kit: true, order_id: order_id, unit_price: 0
     )
     if request.save!
-      puts('Request saved: ' + request.id.to_s)
       save_reagent_data_on_row(row, request.id)
     end
   end
@@ -95,7 +94,6 @@ module ImportsHelper
     )
 
     if reagent.save!
-      puts('Reagent saved: ' +reagent.id.to_s)
     end
   end
 

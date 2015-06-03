@@ -1,14 +1,11 @@
 <h1>
-  Delivery Log for <%= @request.reagent_name %>
-  <% if @request.is_reagent_kit %>
-      Kit
-  <% end %>
-
+  Create Delivery Log for:<br>
+  <%= @request.reagent_name %>
 </h1>
 
 <p>
   <strong>Requested By:</strong> <%= @request.requested_by %>    <strong>Order Number: </strong> <br>
-  <strong>Requested Date:</strong> <%= @request.requested_date  %>    <strong>Ordered Date: </strong> <%= @request.order.ordered_date %> <br>
+  <strong>Requested Date:</strong> <%= @request.requested_date  %>    <strong>Ordered Date: </strong> <%= @request.order_ordered_date %> <br>
 </p>
 
 <p>

@@ -2,6 +2,10 @@
 <h1 class="home">Inventory Management</h1>
 <center>
     <%= form_for :ad_user, url:  login_path,  html: { class: 'log_in', id: 'log_in' }  do |s|   %>
+      <% if flash[:error] %>
+          <span class='danger'><%= flash[:error] %></span>
+      <% end %>
+
       <% if flash[:danger] %>
           <span class='danger'><%= flash[:danger] %></span>
       <% end %>

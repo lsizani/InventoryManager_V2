@@ -1,25 +1,16 @@
 class RequestsController < ApplicationController
 
   def index
-    if current_user != nil
-       @requests = Request.all
+       @requests = Request.paginate(:page => params[:page])
        if params[:order].blank?
          @requests = @requests.all
        else
          @requests = @requests.order(params[:order])
        end
-    else
-      redirect_to root_path
-    end
   end
 
   def new
-    if current_user != nil
       @request = Request.new
-    else
-      redirect_to root_path
-    end
-
   end
 
   def create
@@ -40,11 +31,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    if current_user != nil
       @request = Request.find(params[:id])
-    else
-      redirect_to root_path
-    end
   end
 
   def update
@@ -59,18 +46,14 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    if current_user != nil
       @request = Request.find(params[:id])
-    else
-      redirect_to root_path
-    end
   end
 
 
   private
   def request_args
      params.require(:request).permit(:requested_by, :requested_date, :reagent_name, :requested_amount, :requested_for_study,
-                                     :catalog_no, :manufacturer, :supplier, :is_reagent_kit)
+                                     :catalog_no, :manufacturer, :supplier, :is_reagent_kit, :for_lab)
   end
 
 

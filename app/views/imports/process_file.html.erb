@@ -15,7 +15,6 @@
   </thead>
   <tbody id="altColors">
   <% @data.each do |sheet| %>
-      <% puts('Starting: ' + sheet + ' ' + @xlsx.sheet(sheet).last_row.to_s)  %>
       <tr><td colspan="8"><h3><%= sheet %></h3></td></tr>
       <% (4.. get_last_index(@xlsx.sheet(sheet))).each do |i| %>
           <% s = @xlsx.sheet(sheet).row(i) %>
@@ -30,8 +29,6 @@
             <td><%= s[13] %></td>
       <% end %>
       </tr>
-      <% puts('Finished: ' + sheet ) %>
-
   <% end %>
   </tbody>
 </table>
@@ -40,6 +37,6 @@
 <br>
 <div class='navBox'>
   <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
-  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Home', :controller => 'dashboard', :action => 'index'  %> |
   <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
 </div>

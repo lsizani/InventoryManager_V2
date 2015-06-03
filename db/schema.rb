@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423170211) do
+ActiveRecord::Schema.define(version: 20150520134315) do
+
+  create_table "audits", force: true do |t|
+    t.string   "changed_by"
+    t.string   "approved_by"
+    t.text     "reason_for_change"
+    t.date     "date_changed"
+    t.date     "date_approved"
+    t.integer  "order_id"
+    t.integer  "request_id"
+    t.integer  "reagent_id"
+    t.integer  "kit_item_id"
+    t.integer  "log_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "kit_items", force: true do |t|
     t.integer  "reagent_id"
@@ -31,6 +46,15 @@ ActiveRecord::Schema.define(version: 20150423170211) do
     t.datetime "updated_at"
   end
 
+  add_index "kit_items", ["reagent_id"], name: "index_kit_items_on_reagent_id", using: :btree
+
+  create_table "labs", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "lab_manager"
+  end
+
   create_table "logs", force: true do |t|
     t.integer  "reagent_id"
     t.integer  "number"
@@ -45,6 +69,8 @@ ActiveRecord::Schema.define(version: 20150423170211) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "logs", ["reagent_id"], name: "index_logs_on_reagent_id", using: :btree
 
   create_table "online_users", force: true do |t|
     t.string   "first_name"
@@ -96,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150423170211) do
   end
 
   add_index "reagents", ["id"], name: "index_reagents_on_id", using: :btree
+  add_index "reagents", ["request_id"], name: "index_reagents_on_request_id", using: :btree
 
   create_table "requests", force: true do |t|
     t.string   "reagent_name"
@@ -120,7 +147,11 @@ ActiveRecord::Schema.define(version: 20150423170211) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "units"
+    t.string   "for_lab"
   end
+
+  add_index "requests", ["order_id"], name: "index_requests_on_order_id", using: :btree
+  add_index "requests", ["reagent_id"], name: "index_requests_on_reagent_id", using: :btree
 
   create_table "studies", force: true do |t|
     t.string   "study_name"

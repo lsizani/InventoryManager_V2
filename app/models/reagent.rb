@@ -1,6 +1,8 @@
 class Reagent < ActiveRecord::Base
   belongs_to :request
   has_many :kit_items
+  has_many :audits
+
 
   delegate :is_reagent_kit, :reagent_name, :requested_date, :order,  :to => :request, :prefix => true
 

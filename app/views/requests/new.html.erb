@@ -20,6 +20,9 @@
       |
       <%= r.label :requested_Date %>
       <%= r.date_select :requested_date  %>
+      |
+      <%= r.label :for_lab %>
+      <%= r.collection_select(:for_lab, Labs.all, :name, :name) %>
     </p>
     <p class ='required'>
       <%= r.label :kit_or_single_item? %>  <br>

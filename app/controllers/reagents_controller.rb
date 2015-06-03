@@ -1,21 +1,11 @@
 class ReagentsController < ApplicationController
   def index
-    if current_user != nil
-      @reagents = Reagent.all
-    else
-      redirect_to root_path
-    end
-
+    @reagents = Reagent.all
   end
 
   def new
-    if current_user != nil
-      @reagent = Reagent.new
-      @request = Request.find(params[:id])
-    else
-      redirect_to root_path
-    end
-
+     @reagent = Reagent.new
+     @request = Request.find(params[:id])
   end
 
   def create
@@ -35,13 +25,8 @@ class ReagentsController < ApplicationController
   end
 
   def edit
-    if current_user != nil
       @order = Order.find(params[:id])
       @reagent = Reagent.find_by(order_id:@order.id)
-    else
-      redirect_to root_path
-    end
-
   end
 
   def update
@@ -54,18 +39,9 @@ class ReagentsController < ApplicationController
   end
 
   def show
-    if current_user != nil
       @reagent = Reagent.find(params[:id])
       code = make_code(@reagent)
       @qr = RQRCode::QRCode.new( code, :size => 4, :level => :h )
-    else
-      redirect_to root_path
-    end
-
-  end
-
-  def show_reagent
-    redirect_to :controller => 'reagents' , :action => 'show', :id=> params[:id]
   end
 
   private

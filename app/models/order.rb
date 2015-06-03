@@ -1,11 +1,12 @@
 class Order < ActiveRecord::Base
   has_many :requests
+  has_many :audits
   validates :order_no, presence: true
 
   def update_now(params)
       self.update(status: 'Ordered')
 
-      new_num = OrderNumberCount.first.order_number + 1
+      new_num = self.order_no.to_i + 1
       OrderNumberCount.first.update(order_number: new_num)
 
       Request.where(supplier: self.supplier).each do |r|

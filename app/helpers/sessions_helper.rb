@@ -1,9 +1,6 @@
 module SessionsHelper
   def log_in(user)
     groups = user.groups
-    groups.each do |g|
-      puts(g + ' ' +g.length.to_s)
-    end
     online_user = OnlineUser.new(first_name: user.first_name,
                                  last_name: user.last_name, email: user.email, groups: groups)
     if online_user.save
@@ -24,5 +21,13 @@ module SessionsHelper
     OnlineUser.delete(session[:user_id])
     session.delete(:user_id)
     @current_user = nil
+  end
+
+  def logged_in?
+    if current_user == nil
+      @result = false
+    else
+      @result = true
+    end
   end
 end

@@ -1,0 +1,114 @@
+<h1>Edit order: <%= @order.order_no %> </h1>
+
+<table id="order_form" cellspacing="0px">
+  <form accept-charset="UTF-8" action="update" method="post" >
+      <thead id="form_header" >
+      <tr>
+        <td>
+          <div id="empty">
+
+          </div>
+        </td>
+
+        <td>
+          <div id="company">
+            <h4>Synexa Life Sciences (Pty) Ltd.</h4>
+            <p>Tel. No./Nr. (021) 933 9580</p>
+            <p> Vat. Reg. No. 4570198913 </p>
+          </div>
+        </td>
+        <td rowspan="2">
+          <div id="address">
+            <p>FAKTUUR AAN: </p>
+            <p>INVOICE TO: </p>
+            <p>hlategan@synexagroup.com</p>
+            <p>PO Box 1573</p>
+            <p>Bellville</p>
+            <p>7535</p>
+          </div>
+        </td>
+        <td>
+          <div id="date">
+            Datum: <br>
+            Date: <br>
+            <input type="datetime-local" name="order[ordered_date]" value="<%= @order.ordered_date %>" />
+          </div>
+        </td>
+        <td>
+          <div id="order_number">
+            Bestel Nr.:<br>
+            Order No.:<br>
+            <input type="text" name="order[order_no]" value="<%= @order.order_no %>" />
+
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="to">
+            <p>AAN</p>
+            <p>TO</p>
+          </div>
+        </td>
+        <td>
+          <input type="text" name="order[supplier]" value="<%= @order.supplier %>" />
+        </td>
+        <td colspan="2">
+          <div id="delivery_address">
+            Afleweringsadres:<br>
+            Delivery Address:<br>
+            <br>
+            Synexa Life Sciences (Pty) Ltd.<br>
+            No. 4 Kunene Circle<br>
+            Omuramba Business Park<br>
+            Montague Gardens<br>
+            Milnerton<br>
+            7441
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5"><br></td>
+      </tr>
+      </thead>
+      <tbody id="form_body">
+      <tr>
+        <td>HOEV. <br>AMOUNT</td>
+        <td>BESKRYWING <br>DESCRIPTION</td>
+        <td>KAT. NR. <br>CAT. NO.</td>
+        <td>EENHYDSPRYS <br>UNIT PRICE</td>
+        <td>NETOBEDRAG <br>NET AMOUNT</td>
+      </tr>
+        <% if @requests != nil %>
+            <% @requests.each do |r| %>
+                <tr>
+                  <td >
+                    <input type="text" name="order[ordered_amount][<%=r.id%>]" value="<%=r.requested_amount%>" size="4"/>
+                  </td>
+
+                  <td><%= r.reagent_name %></td>
+                  <td>
+                    <input type="text" name="order[catalog_no][<%=r.id%>]" value="<%=r.catalog_no%>"/>
+                  </td>
+                  <td>
+                    <input type="text" name="order[unit_price][<%=r.id%>]" value="<%=r.unit_price%>"/>
+                  </td>
+                  <td><input type="text" name="order[net_amount][<%=r.id%>]" value="<%=r.net_amount%>"/></td>
+                </tr>
+            <% end %>
+            <tr>
+              <input type="hidden" name="order[supplier]" value="<%= @requests.first.supplier %>" />
+              <td colspan="5">
+                <input type="submit" value="Submit"/>
+              </td>
+            </tr>
+        <%end%>
+  </form>
+  </tbody>
+</table>
+
+<div class='navBox'>
+  <%= link_to 'Reagent Requests', :controller => 'requests', :action => 'index'%>   |
+  <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %> |
+  <%= link_to 'Stored Reagents', :controller => 'reagents', :action => 'index' %>
+</div>

@@ -2,20 +2,11 @@ class OrdersController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    if current_user != nil
-      @orders = Order.where(status: %w(OBO Ordered Delivered))
-    else
-      redirect_to root_path
-    end
-
+    @orders = Order.where(status: %w(OBO Ordered Delivered))
   end
 
   def new
-    if current_user != nil
-     @order = Order.new
-    else
-      redirect_to root_path
-    end
+   @order = Order.new
   end
 
   def requests_for_supplier
@@ -24,26 +15,27 @@ class OrdersController < ApplicationController
   end
 
   def edit
-
-    if current_user != nil
       @order = Order.find(params[:id])
-      redirect_to :controller => 'orders', :action => 'new', :id => @order.request.id
-    else
-      redirect_to root_path
-    end
+      @requests = Request.where(:order_id => @order.id)
+  end
 
+  def update
+    @order = Order.find(params[:id])
+    if @order.update(order_no: order_params[:order_no], ordered_date: order_params[:ordered_date],
+                     supplier: order_params[:supplier])
+      @order.update_now(order_params)
+      redirect_to :action => 'show', :controller => 'orders', :id => @order.id
+    else
+      redirect_to :action => 'edit', :controller => 'orders', :id => @order.id
+    end
   end
 
 
   def create
-    puts(create_params[:order_no])
-    puts(create_params[:supplier])
-    puts(Date.parse(create_params[:ordered_date]))
-
-    @order = Order.new(order_no: create_params[:order_no], supplier:create_params[:supplier],
-          ordered_date: Date.parse(create_params[:ordered_date]))
+    @order = Order.new(order_no: order_params[:order_no], supplier:order_params[:supplier],
+          ordered_date: Date.parse(order_params[:ordered_date]))
     if @order.save
-       @order.update_now(create_params)
+       @order.update_now(order_params)
       begin
         NoticeMailer.notify_new_order(@order).deliver
       rescue Exception => e
@@ -57,16 +49,11 @@ class OrdersController < ApplicationController
   end
 
   def show
-    if current_user != nil
-        @order = Order.find(params[:id])
-    else
-      redirect_to root_path
-    end
-
+    @order = Order.find(params[:id])
   end
 
   private
-  def create_params
+  def order_params
       params.require(:order).permit!
   end
 

@@ -16,8 +16,13 @@ InventoryManagerV2::Application.routes.draw do
   post   'make_order'           => 'orders#create'
   get    'imports_index'        => 'imports#index'
   post   'file_import_path'     => 'imports#upload'
-  post    'file_process_path'    => 'imports#process_file'
-
+  post   'file_process_path'    => 'imports#process_file'
+  get    'all_labs'             => 'labs#index'
+  get    'dashboard'            => 'dashboard#index'
+  post   'orders/:id/update'     => 'orders#update'
+  get    'new_lab'               => 'labs#new'
+  post   'create_lab'            => 'labs#create'
+  #get
 
 
   namespace :admin do
@@ -27,12 +32,11 @@ InventoryManagerV2::Application.routes.draw do
     resources :requests
     resources :orders
     resources :studies
+    resource  :audits
 
     resources :reagents, :kit_items do
       resources :logs
     end
-
-    resources :dashboard, :only => [:index]
     resources :reports
 
   end

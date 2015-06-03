@@ -37,7 +37,7 @@
       <div id="order_number">
         Bestel Nr.:<br>
         Order No.:<br>
-        <%= @order.order_no %>
+        <%= link_to @order.order_no, :controller => 'orders', :action => 'edit'%>
       </div>
     </td>
   </tr>

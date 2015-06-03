@@ -11,36 +11,38 @@
     <td>Request Date</td>
     <td>Request Status</td>
     <td>Last Date Updated</td>
-    <td>Edit / Place Order</td>
+    <td>For Lab</td>
    </tr>
   </thead>
   <tbody id="altColors">
     <% @requests.each do |request| %>
         <tr>
-          <td><%= request.reagent_name %></td>
+          <td>
+            <% if request.show_receive_link?%>
+                <%= link_to  request.reagent_name , :controller => 'reagents', :action => 'new', :id => request.id  %>
+            <% else %>
+                <%= request.reagent_name %></td>
+            <% end %>
           <td><%=request.requested_by %></td>
           <td><%=request.requested_for_study %></td>
           <td><%=request.requested_amount %></td>
           <td><%=request.requested_date %></td>
           <td><%=request.status %></td>
           <td><%=request.last_update_date %></td>
-          <td>
-            <p>
-              <% if request.show_edit_link? %>
-                <%= link_to 'Edit', :controller => 'requests', :action => 'edit', :id => request.id  %>
-              <% end %>
-              <% if request.show_receive_link?%>
-                  <%= link_to 'Log Reagent', :controller => 'reagents', :action => 'new', :id => request.id  %>
-              <% end %>
-            </p>
-          </td>
+          <td><%=request.for_lab %></td>
         </tr>
     <% end %>
   </tbody>
 </table>
+  <div class="digg_pagination" align="center">
+    <div class="page_info" align="center">
+      <%= page_entries_info @requests %>
+    </div>
+    <%= will_paginate @requests, :container => false %>
+  </div>
 </div>
 <br>
-<div class="navBox">
+<div class="navBox" >
     <%= link_to 'New Request', :controller => 'requests', :action => 'new'  %>  |
     <%= link_to 'Home', :controller => 'welcome', :action => 'index'  %>
 </div>

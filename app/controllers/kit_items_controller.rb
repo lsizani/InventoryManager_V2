@@ -1,22 +1,14 @@
 class KitItemsController < ApplicationController
 
   def index
-    if current_user != nil
       @reagent = Reagent.find(params[:reagent_id])
       @items = KitItem.where(:reagent_id => params[:reagent_id], :is_item_used => false)
-    else
-      redirect_to root_path
-    end
   end
 
   def new
-    if current_user != nil
       @kit_item = KitItem.new()
       @reagent = Reagent.find(params[:reagent_id])
       @items = KitItem.where('reagent_id=' + params[:reagent_id])
-    else
-      redirect_to root_path
-    end
   end
 
   def create

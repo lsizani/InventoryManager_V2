@@ -1,3 +1,0 @@
-module ReagentsHelper
-
-end
